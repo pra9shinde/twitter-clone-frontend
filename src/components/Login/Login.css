@@ -1,0 +1,87 @@
+.login {
+  background: #15202b;
+  width: 100%;
+  height: 100vh;
+  padding: 30px;
+}
+
+.login__container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.login__icon .MuiSvgIcon-root {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.login__container h1 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 23px;
+  color: #ffffff;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondary__btn {
+  background-color: transparent !important;
+  color: var(--twitter-color) !important;
+  font-weight: 600 !important;
+  border: 0 !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+  margin-right: 10px !important;
+  border: 1px solid var(--twitter-color) !important;
+}
+
+.login__form input {
+  color: #ffffff;
+  background-color: transparent;
+  outline: 0;
+  height: 60px;
+  border: 1px solid rgba(230, 229, 229, 0.2);
+  margin: 10px 0;
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+
+.login__input.active {
+  border: 2px solid var(--twitter-color);
+}
+
+/*------------ Animation using react transition group ---------*/
+
+/* Appear -: on pageload or when component is loaded*/
+.fade-appear {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 600ms ease-in;
+}
+
+/* Fade -: When component is removed */
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 600ms ease-in;
+}
+
+/*------------ Animation using react transition group ---------*/
