@@ -1,27 +1,48 @@
 .sidebar {
-    border-right: 1px solid var(--twitter-background);
-    flex: 0.2;
-    min-width: 250px;
-    padding-left: 20px;
-    padding-right: 20px;
+  border-right: 1px solid var(--twitter-background);
+  flex: 0.2;
+  min-width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar__tweet {
-    background-color: var(--twitter-color) !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    border: 0 !important;
-    text-transform: inherit !important;
-    border-radius: 30px !important;
-    height: 50px !important;
-    margin-top: 20px !important;
-    margin-right: 10px !important;
+  background-color: var(--twitter-color) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border: 0 !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+  margin-right: 10px !important;
 }
 
 .sidebar__twitterIcon {
-    color: var(--twitter-color);
-    font-size: 30px !important;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+  color: var(--twitter-color);
+  font-size: 30px !important;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* Modal show animation */
+/* Enter -: When component is loaded*/
+.sidebar__logout-modal-enter {
+  opacity: 0;
+}
+
+.sidebar__logout-modal-enter.sidebar__logout-modal-enter-active {
+  opacity: 1;
+  transition: all 250ms ease-in;
+}
+
+.sidebar__logout-modal-exit {
+  opacity: 1;
+}
+.sidebar__logout-modal-exit-active {
+  opacity: 0;
+  transition: all 250ms ease-out;
 }

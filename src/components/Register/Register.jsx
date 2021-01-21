@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import BgImage from '../../assets/images/bg-image.svg';
 
+
 const Register = ({inputHandler, closeRegister}) => {
     return (
         <div className="register" style={{backgroundImage: `url(${BgImage})`, backgroundRepeat:'no-repeat' }}>

@@ -60,20 +60,19 @@
 
 /*------------ Animation using react transition group ---------*/
 
-/* Appear -: on pageload or when component is loaded*/
-.fade-appear {
+/* Enter -: When component is loaded*/
+.fade-enter {
   opacity: 0;
   transform: translateY(-100%);
 }
 
-.fade-appear.fade-appear-active {
+.fade-enter.fade-enter-active {
   opacity: 1;
   transform: translateY(0);
   transition: all 600ms ease-in;
 }
 
 /* Fade -: When component is removed */
-
 .fade-exit {
   opacity: 1;
   transform: translateY(0);

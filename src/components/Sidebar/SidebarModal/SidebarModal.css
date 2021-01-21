@@ -1,0 +1,91 @@
+.sidebar__logout {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.sidebar__logout__container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+  width: 100%;
+}
+
+.sidebar__logout__container:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+  border-radius: 30px;
+}
+
+.sidebar__logout__image .MuiAvatar-root {
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar__logout__info,
+.sidebar__logout__more {
+  margin-left: 5px;
+}
+
+.sidebar__logout__info h6 {
+  font-size: 12px;
+}
+
+.sidebar__logout__info p {
+  font-size: 12px;
+}
+
+.sidebar__logout__more {
+  text-align: right;
+  flex: 1;
+}
+
+.sidebar__logout__image {
+  position: relative;
+}
+
+.sidebar__logout-modal {
+  position: absolute;
+  left: 0;
+  top: -210px;
+  z-index: 20;
+  background-color: #ffffff;
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__logout-modal__top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 5px;
+}
+
+.sidebar__logout__image .sidebar__logout-modal__top .MuiAvatar-root {
+  width: 50px;
+  height: 50px;
+}
+
+.sidebar__logout__more.modal .MuiSvgIcon-root {
+  color: var(--twitter-color);
+}
+
+.sidebar__logout-modal__bottom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sidebar__logout-modal__bottom p {
+  padding: 10px;
+}
