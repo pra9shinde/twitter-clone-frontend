@@ -1,0 +1,37 @@
+.trendingRow {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(235, 238, 240);
+}
+
+.trendingRow__left {
+  margin-right: 5px;
+}
+
+.trendingRow h6 {
+  color: #8897a5;
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+.trendingRow h5 {
+  font-weight: bold;
+}
+
+.trendingRow p {
+  font-size: 12px;
+  color: #8897a5;
+  margin: 10px 0;
+}
+
+.trendingRow__right img {
+  max-height: 70px;
+  height: 100%;
+  width: auto;
+  border-radius: 15px;
+}

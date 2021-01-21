@@ -1,10 +1,11 @@
 import React from 'react';
 import './WidgetBox.css';
 
-const WidgetBox = () => {
+const WidgetBox = (props) => {
   return (
     <div className="widgetBox">
-      <h1>Widget</h1>
+      <h3>{props.title}</h3>
+      {props.children}
     </div>
   );
 };

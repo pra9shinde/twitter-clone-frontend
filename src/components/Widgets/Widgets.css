@@ -1,11 +1,7 @@
 .widgets {
   flex: 0.3;
-  padding: 10px;
-  /* background-color: #f5f8fa;
-  border-radius: 20px; */
   margin-top: 10px;
   margin-left: 10px;
-  height: 100%;
 }
 
 .widgets__input {
@@ -16,10 +12,6 @@
   border-radius: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
-}
-
-.widgets__container h2 {
-  font-size: 18px;
 }
 
 .widgets__input > input {

@@ -1,0 +1,36 @@
+.followRow {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.followRow:hover,
+.trendingRow:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+}
+
+.followRow__details {
+  margin: 0 10px;
+  flex: 1;
+}
+
+.followRow__details__name {
+  display: flex;
+  align-items: center;
+}
+
+.followRow .followRow__profilePic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.followRow__details__name h6 {
+  font-size: 14px;
+}
+
+.followRow__details__username p {
+  font-size: 12px;
+}

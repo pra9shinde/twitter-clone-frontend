@@ -58,7 +58,13 @@ const Login = () => {
                 <Button variant="outlined" className="sidebar__tweet" fullWidth>
                   Login
                 </Button>
-                <Button variant="outlined" className="secondary__btn" fullWidth onClick={showRegisterHandler}>
+                <Button
+                  variant="outlined"
+                  className="secondary__btn"
+                  style={{ marginTop: '20px' }}
+                  fullWidth
+                  onClick={showRegisterHandler}
+                >
                   Register
                 </Button>
               </form>
