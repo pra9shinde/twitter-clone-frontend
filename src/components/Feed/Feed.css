@@ -4,6 +4,7 @@
     min-width: fit-content;
     overflow-y: scroll;
     position: relative;
+    min-height: 100vh;
 }
 
 .feed__wrapper {

@@ -4,6 +4,10 @@
     min-width: 250px;
     padding-left: 20px;
     padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 100vh;
 }
 
 .sidebar__tweet {

@@ -1,65 +1,90 @@
 .verifiedIcon {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .post {
-  display: flex;
-  padding-bottom: 10px;
-  align-items: flex-start;
-  border-bottom: 1px solid var(--twitter-background);
+    display: flex;
+    padding-bottom: 10px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--twitter-background);
 }
 
 .post__body {
-  flex: 1;
-  padding: 10px;
+    flex: 1;
+    padding: 10px;
 }
 
 .post__headerText {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .post__avatar {
-  margin: 15px 0 0 10px;
-  width: 40px;
-  height: 40px;
+    margin: 15px 0 0 10px;
+    width: 40px;
+    height: 40px;
 }
 
 .post__verified {
-  margin: 0 5px 0 2px;
+    margin: 0 5px 0 2px;
 }
 
 .post__verified > img {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 
 .post__username {
-  font-weight: 600;
-  color: gray;
-  font-size: 12px;
+    font-weight: 600;
+    color: gray;
+    font-size: 12px;
 }
 
 .postHeaderDesc {
-  margin-bottom: 10px;
-  font-size: 15px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .post__image {
-  border-radius: 20px;
-  max-width: 600px;
-  width: 100%;
-  margin-top: 10px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .postHeaderDesc img {
-  width: 100%;
+    width: 100%;
 }
 
 .post__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  max-width: 600px;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 600px;
+    width: 100%;
+}
+
+.post__footer__option {
+    cursor: pointer;
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    transition: all 0.2s ease-in;
+}
+
+.post__footer__option span {
+    margin-left: 8px;
+}
+
+.post__footer__option.retweet.active {
+    color: #50e450;
+}
+
+.post__footer__option.like.active {
+    color: lightcoral;
+}
+
+.post__footer__option:hover {
+    background-color: rgba(29, 161, 242, 0.1);
+    border-radius: 20px;
 }
