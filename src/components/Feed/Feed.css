@@ -9,6 +9,7 @@
 
 .feed__wrapper {
     position: absolute;
+    width: 100%;
 }
 
 .feed__header {
