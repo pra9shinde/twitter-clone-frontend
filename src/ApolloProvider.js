@@ -1,42 +1,22 @@
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import React from "react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client"; //Used to upload files
 
-import App from './App';
+import App from "./App";
 
+// //Normal apollo client
+// const client = new ApolloClient({
+//     uri: 'http://localhost:4000',
+//     cache: new InMemoryCache(),
+// });
+
+// Required if we want to upload files with apollo gql
 const client = new ApolloClient({
-    uri: 'http://localhost:4000',
+    link: createUploadLink({
+        uri: "http://localhost:4000",
+    }),
     cache: new InMemoryCache(),
 });
-
-/*
-    // Vanilla test if its working
-    client
-        .query({
-            query: gql`
-                query {
-                    getPosts {
-                        id
-                        body
-                        createdAt
-                        username
-                        likeCount
-                        likes {
-                            username
-                        }
-                        commentCount
-                        comments {
-                            id
-                            username
-                            createdAt
-                            body
-                        }
-                    }
-                }
-            `,
-        })
-        .then((result) => console.log(result))
-        .catch((e) => console.log(e));
-*/
 
 function Apollo() {
     return (

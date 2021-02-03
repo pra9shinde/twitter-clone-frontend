@@ -6,8 +6,7 @@ import { Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import BgImage from "../../assets/images/bg-image.svg";
 
-import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
+import { useMutation, gql } from "@apollo/client";
 
 const Register = ({ inputHandler, closeRegister }) => {
     const [values, setValues] = useState({
@@ -16,20 +15,27 @@ const Register = ({ inputHandler, closeRegister }) => {
         email: "",
         password: "",
         confirmPassword: "",
-        name: "",
+        image: null,
     });
 
     // GQL Mutation - On Register
+    // const [registerUser, { loading }] = useMutation(REGISTER_USER, {
+    //     update(proxy, result) {
+    //         console.log(result);
+    //     },
+    //     variables: values,
+    // });
+
     const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-        update(proxy, result) {
-            console.log(result);
-        },
-        variables: values,
+        onCompleted: (data) => console.log(data),
     });
 
     function registerSubmitHandler(event) {
         event.preventDefault();
-        registerUser();
+        const fileEl = document.getElementById("profilePic");
+        const file = fileEl.files[0];
+
+        registerUser({ variables: { ...values, image: file } });
     }
 
     function changeHandler(event) {
@@ -51,8 +57,8 @@ const Register = ({ inputHandler, closeRegister }) => {
                         <form className="login__form" noValidate onSubmit={registerSubmitHandler}>
                             <input
                                 type="text"
-                                name="name"
-                                placeholder="Full Name*"
+                                name="username"
+                                placeholder="Username*"
                                 onFocus={inputHandler}
                                 onBlur={inputHandler}
                                 onChange={changeHandler}
@@ -60,8 +66,8 @@ const Register = ({ inputHandler, closeRegister }) => {
                             />
                             <input
                                 type="text"
-                                name="username"
-                                placeholder="Username*"
+                                name="name"
+                                placeholder="Full Name*"
                                 onFocus={inputHandler}
                                 onBlur={inputHandler}
                                 onChange={changeHandler}
@@ -95,7 +101,7 @@ const Register = ({ inputHandler, closeRegister }) => {
                                 className="login__input"
                             />
 
-                            <div>
+                            <div className="selectGroup">
                                 <input type="file" name="profilePic" id="profilePic" />
                                 <label htmlFor="profilePic" style={{ marginLeft: "10px" }}>
                                     Profile Picture
@@ -117,13 +123,16 @@ const Register = ({ inputHandler, closeRegister }) => {
 };
 
 const REGISTER_USER = gql`
-    mutation register($username: String!, $password: String!, $confirmPassword: String!, $email: String!, $name: String!) {
-        register(registerInput: { username: $username, password: $password, confirmPassword: $confirmPassword, email: $email, name: $name }) {
+    mutation register($username: String!, $password: String!, $confirmPassword: String!, $email: String!, $name: String!, $image: Upload) {
+        register(
+            registerInput: { username: $username, password: $password, confirmPassword: $confirmPassword, email: $email, name: $name, image: $image }
+        ) {
             id
             username
             createdAt
             token
             name
+            profilePic
         }
     }
 `;
