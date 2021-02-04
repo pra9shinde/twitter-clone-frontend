@@ -5,33 +5,40 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import { Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import BgImage from "../../assets/images/bg-image.svg";
+import Loader from "../Loader/Loader";
 
 import { useMutation, gql } from "@apollo/client";
+import { useHistory } from "react-router";
 
 const Register = ({ inputHandler, closeRegister }) => {
+    let history = useHistory();
+
+    // States
     const [values, setValues] = useState({
         name: "",
         username: "",
         email: "",
         password: "",
         confirmPassword: "",
-        image: null,
     });
+    const [showLoader, setShowLoader] = useState(false);
+    const [errors, setErrors] = useState({});
 
-    // GQL Mutation - On Register
-    // const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-    //     update(proxy, result) {
-    //         console.log(result);
-    //     },
-    //     variables: values,
-    // });
-
+    // Apollo POST Request
     const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-        onCompleted: (data) => console.log(data),
+        onCompleted: (data) => {
+            setShowLoader(false);
+            history.push("/");
+        },
+        onError: (err) => {
+            setErrors(err.graphQLErrors[0].extensions.errors);
+            setShowLoader(false);
+        },
     });
 
     function registerSubmitHandler(event) {
         event.preventDefault();
+        setShowLoader(true);
         const fileEl = document.getElementById("profilePic");
         const file = fileEl.files[0];
 
@@ -43,7 +50,7 @@ const Register = ({ inputHandler, closeRegister }) => {
     }
 
     return (
-        <div className="register" style={{ backgroundImage: `url(${BgImage})`, backgroundRepeat: "no-repeat" }}>
+        <div className="register" style={{ background: `url(${BgImage}), #15202B `, backgroundRepeat: "no-repeat" }}>
             <div className="register__backdrop">
                 <div className="register__modal">
                     <div className="register__modal-content">
@@ -54,6 +61,17 @@ const Register = ({ inputHandler, closeRegister }) => {
                             <CloseIcon />
                         </div>
                         <h1>Create your account</h1>
+
+                        {Object.keys(errors).length > 0 && (
+                            <div className="register__errors">
+                                <ul className="errors-ul">
+                                    {Object.values(errors).map((value, i) => (
+                                        <li key={i}>*{value}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
                         <form className="login__form" noValidate onSubmit={registerSubmitHandler}>
                             <input
                                 type="text"
@@ -108,12 +126,24 @@ const Register = ({ inputHandler, closeRegister }) => {
                                 </label>
                             </div>
 
-                            <Button type="submit" variant="outlined" className="sidebar__tweet" fullWidth>
-                                Create
-                            </Button>
-                            <Button variant="outlined" className="secondary__btn" fullWidth style={{ marginTop: "20px" }} onClick={closeRegister}>
-                                Login
-                            </Button>
+                            {showLoader ? (
+                                <Loader />
+                            ) : (
+                                <>
+                                    <Button type="submit" variant="outlined" className="sidebar__tweet" fullWidth>
+                                        Create
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        className="secondary__btn"
+                                        fullWidth
+                                        style={{ marginTop: "20px" }}
+                                        onClick={closeRegister}
+                                    >
+                                        Login
+                                    </Button>
+                                </>
+                            )}
                         </form>
                     </div>
                 </div>

@@ -1,31 +1,19 @@
 .register {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     /* background-color: #31404e; */
     background-color: #15202b;
     z-index: 100;
 }
 
 .register .register__backdrop {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    padding: 10px;
 }
 
 .register .register__modal {
     max-width: 600px;
     min-height: 400px;
-    width: 90vw;
-    position: absolute;
-    left: 50%;
-    top: 40px;
     margin: 0 auto;
-    transform: translateX(-50%);
     /* background-color: #15202b; */
     background-color: rgba(0, 0, 0, 0.9);
     color: #ffffff;
@@ -61,4 +49,14 @@
 .selectGroup {
     display: flex;
     align-items: center;
+}
+
+.register__errors .errors-ul {
+    list-style: none;
+}
+
+.register__errors .errors-ul li {
+    margin: 5px 0px;
+    color: salmon;
+    padding: 3px 0px;
 }
