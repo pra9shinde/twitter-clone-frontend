@@ -1,11 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
-import ApolloProvider from './ApolloProvider'; //Connect to Apollo Graphql backend like axios
+import ApolloProvider from "./ApolloProvider"; //Connect to Apollo Graphql backend like axios
+import { AuthProvider } from "./context/auth"; //Context API
 
-ReactDOM.render(<ApolloProvider />, document.getElementById('root'));
+ReactDOM.render(
+    <AuthProvider>
+        <ApolloProvider />
+    </AuthProvider>,
+    document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

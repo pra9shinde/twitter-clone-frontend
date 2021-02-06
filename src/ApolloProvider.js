@@ -2,20 +2,27 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client"; //Used to upload files
 import config from "./config";
+import { setContext as apolloContext } from "apollo-link-context"; //Required to pass auth headers for each comp
 
 import App from "./App";
 
-// //Normal apollo client
-// const client = new ApolloClient({
-//     uri: 'http://localhost:4000',
-//     cache: new InMemoryCache(),
-// });
+// Bind Authentication header to each request
+const authLink = apolloContext(() => {
+    const token = localStorage.getItem("jwtToken");
+    return {
+        headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+        },
+    };
+});
 
 // Required if we want to upload files with apollo gql
 const client = new ApolloClient({
-    link: createUploadLink({
-        uri: config.SERVER_URL,
-    }),
+    link: authLink.concat(
+        createUploadLink({
+            uri: config.SERVER_URL,
+        })
+    ),
     cache: new InMemoryCache(),
 });
 

@@ -5,23 +5,22 @@ import "./App.css";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 
-import { AuthProvider, AuthContext } from "./context/auth";
+import { AuthContext } from "./context/auth";
 
 function App() {
     const { user } = useContext(AuthContext);
 
     return (
-        <AuthProvider>
-            <div className="app">
-                <Router>
-                    <Switch>
-                        <Route path="/login" component={Login} exact />
-                        {/* Authenticated user send home else login */}
-                        {user ? <Route path="/" component={Home} /> : <Redirect to="/login" />}
-                    </Switch>
-                </Router>
-            </div>
-        </AuthProvider>
+        <div className="app">
+            <Router>
+                <Switch>
+                    {/* <Route path="/" component={Home} /> */}
+                    <Route path="/login" component={Login} exact />
+                    {user ? <Route path="/" component={Home} /> : <Redirect to="/login" />}
+                    {/* <Route path="/" render={() => (user ? <Route component={Home} /> : <Route component={Login} />)} /> */}
+                </Switch>
+            </Router>
+        </div>
     );
 }
 

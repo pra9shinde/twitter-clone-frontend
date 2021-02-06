@@ -8,9 +8,9 @@ import Post from "./Post/Post";
 import Loader from "../Loader/Loader";
 
 const Feed = () => {
-    const { loading, error, data } = useQuery(FETCH_POSTS_QUERY);
+    const { loading, data } = useQuery(FETCH_POSTS_QUERY);
     let posts = data ? data.getPosts : null;
-    console.log(posts);
+    // console.log(posts);
 
     return (
         <div className="feed">

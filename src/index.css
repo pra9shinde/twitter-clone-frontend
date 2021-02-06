@@ -33,3 +33,12 @@ input {
     color: salmon;
     padding: 3px 0px;
 }
+
+.errors {
+    background: rgba(250, 128, 114, 0.7);
+    margin: 10px 0;
+    color: #860e0e;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+}

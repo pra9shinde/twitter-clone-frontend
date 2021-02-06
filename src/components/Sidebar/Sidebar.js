@@ -23,7 +23,6 @@ import config from "../../config";
 
 const Sidebar = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
 
     const [showModal, setShowModal] = useState(false);
 

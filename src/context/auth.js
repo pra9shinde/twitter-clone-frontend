@@ -43,6 +43,7 @@ function AuthProvider(props) {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
     function login(userData) {
+        state.user = userData;
         localStorage.setItem("jwtToken", userData.token);
         dispatch({
             type: "LOGIN",
@@ -51,8 +52,8 @@ function AuthProvider(props) {
     }
 
     function logout() {
+        state.user = null;
         localStorage.removeItem("jwtToken");
-
         dispatch({
             type: "LOGOUT",
         });
