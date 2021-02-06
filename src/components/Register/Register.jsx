@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Register.css";
 
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -6,11 +6,15 @@ import { Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import BgImage from "../../assets/images/bg-image.svg";
 import Loader from "../Loader/Loader";
+import { Link } from "react-router-dom";
 
 import { useMutation, gql } from "@apollo/client";
 import { useHistory } from "react-router";
+import { AuthContext } from "../../context/auth";
 
 const Register = ({ inputHandler, closeRegister }) => {
+    const context = useContext(AuthContext);
+
     let history = useHistory();
 
     // States
@@ -25,8 +29,9 @@ const Register = ({ inputHandler, closeRegister }) => {
     const [errors, setErrors] = useState({});
 
     // Apollo POST Request
-    const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-        onCompleted: (data) => {
+    const [registerUser] = useMutation(REGISTER_USER, {
+        onCompleted: (res) => {
+            context.login(res.register);
             setShowLoader(false);
             history.push("/");
         },
@@ -55,7 +60,9 @@ const Register = ({ inputHandler, closeRegister }) => {
                 <div className="register__modal">
                     <div className="register__modal-content">
                         <div className="register__icon">
-                            <TwitterIcon />
+                            <Link to="/">
+                                <TwitterIcon />
+                            </Link>
                         </div>
                         <div className="register__closeIcon" onClick={closeRegister}>
                             <CloseIcon />
@@ -63,7 +70,7 @@ const Register = ({ inputHandler, closeRegister }) => {
                         <h1>Create your account</h1>
 
                         {Object.keys(errors).length > 0 && (
-                            <div className="register__errors">
+                            <div className="form__errors">
                                 <ul className="errors-ul">
                                     {Object.values(errors).map((value, i) => (
                                         <li key={i}>*{value}</li>

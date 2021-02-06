@@ -1,10 +1,11 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
-import './Feed.css';
+import React from "react";
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
+import "./Feed.css";
 
-import TweetBox from './TweetBox/TweetBox';
-import Post from './Post/Post';
+import TweetBox from "./TweetBox/TweetBox";
+import Post from "./Post/Post";
+import Loader from "../Loader/Loader";
 
 const Feed = () => {
     const { loading, error, data } = useQuery(FETCH_POSTS_QUERY);
@@ -12,15 +13,15 @@ const Feed = () => {
     console.log(posts);
 
     return (
-        <div className='feed'>
-            <div className='feed__wrapper'>
-                <div className='feed__header'>
+        <div className="feed">
+            <div className="feed__wrapper">
+                <div className="feed__header">
                     <h2>Home</h2>
                 </div>
                 <TweetBox />
 
                 {loading ? (
-                    <h2>Loading Tweets...</h2>
+                    <Loader />
                 ) : (
                     posts &&
                     posts.map((post) => (

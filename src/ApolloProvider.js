@@ -1,6 +1,7 @@
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client"; //Used to upload files
+import config from "./config";
 
 import App from "./App";
 
@@ -13,7 +14,7 @@ import App from "./App";
 // Required if we want to upload files with apollo gql
 const client = new ApolloClient({
     link: createUploadLink({
-        uri: "http://localhost:4000",
+        uri: config.SERVER_URL,
     }),
     cache: new InMemoryCache(),
 });
