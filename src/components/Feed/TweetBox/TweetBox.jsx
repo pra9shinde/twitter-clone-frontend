@@ -12,7 +12,7 @@ import { AuthContext } from "../../../context/auth";
 import config from "../../../config";
 import { useMutation, gql } from "@apollo/client";
 
-const TweetBox = () => {
+const TweetBox = ({ refetch }) => {
     const { user } = useContext(AuthContext);
 
     const [errors, setErrors] = useState("");
@@ -51,10 +51,16 @@ const TweetBox = () => {
     // Apollo POST Request
     const [createPost] = useMutation(CREATE_POST, {
         onCompleted: (res) => {
+            document.getElementById("tweetbox-form").reset();
+            document.getElementById("uploadPreview").src = "";
+            setValues({ ...values, image: false });
             setShowLoader(false);
+
+            refetch();
         },
         onError: (err) => {
-            setErrors(err.graphQLErrors[0].message);
+            const displayError = err.graphQLErrors[0].message ? err.graphQLErrors[0].message : err;
+            setErrors(displayError);
             setShowLoader(false);
         },
     });
@@ -70,7 +76,7 @@ const TweetBox = () => {
 
     return (
         <div className="tweetBox">
-            <form onSubmit={postSubmitHandler}>
+            <form onSubmit={postSubmitHandler} id="tweetbox-form">
                 <div className={`tweetBox__input ${inputFocus ? "active" : ""}`}>
                     <Avatar src={`${config.STATIC_FILES_URL}/${user.profilePic}`} />
                     <input

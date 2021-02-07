@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import "./Feed.css";
@@ -8,9 +8,18 @@ import Post from "./Post/Post";
 import Loader from "../Loader/Loader";
 
 const Feed = () => {
-    const { loading, data } = useQuery(FETCH_POSTS_QUERY);
-    let posts = data ? data.getPosts : null;
-    // console.log(posts);
+    const [posts, setPosts] = useState([]);
+    const { loading, data, refetch } = useQuery(FETCH_POSTS_QUERY);
+
+    if (data && data.getPosts.length !== posts.length) {
+        //to avoid nonstop re-renders
+        setPosts(data.getPosts);
+    }
+    console.log(posts);
+
+    const refreshPosts = () => {
+        refetch();
+    };
 
     return (
         <div className="feed">
@@ -18,7 +27,7 @@ const Feed = () => {
                 <div className="feed__header">
                     <h2>Home</h2>
                 </div>
-                <TweetBox />
+                <TweetBox refetch={refreshPosts} />
 
                 {loading ? (
                     <Loader />
@@ -33,12 +42,10 @@ const Feed = () => {
                             username={post.username}
                             commentCount={post.commentCount}
                             likeCount={post.likeCount}
+                            imageURL={post.imageURL}
                         />
                     ))
                 )}
-
-                {/* <Post />
-                <Post /> */}
             </div>
         </div>
     );
@@ -62,6 +69,7 @@ const FETCH_POSTS_QUERY = gql`
                 createdAt
                 body
             }
+            imageURL
         }
     }
 `;
