@@ -52,7 +52,10 @@ const TweetBox = ({ refetch }) => {
     const [createPost] = useMutation(CREATE_POST, {
         onCompleted: (res) => {
             document.getElementById("tweetbox-form").reset();
-            document.getElementById("uploadPreview").src = "";
+            const uploadEl = document.getElementById("uploadPreview");
+            if (uploadEl) {
+                uploadEl.src = "";
+            }
             setValues({ ...values, image: false });
             setShowLoader(false);
 

@@ -10,7 +10,7 @@ import config from "../../../config";
 
 const VerifiedIcon = require("../../../assets/images/twitter-verified-badge.svg");
 
-const Post = ({ id, displayName, username, verified, text, image, avatar, likeCount, commentCount, likes, createdAt, imageURL }) => {
+const Post = ({ id, displayName, username, verified, text, likeCount, commentCount, likes, createdAt, imageURL, userDetails }) => {
     function commentHandler() {
         console.log("Comment Handler");
     }
@@ -23,12 +23,12 @@ const Post = ({ id, displayName, username, verified, text, image, avatar, likeCo
         <Link to={`/posts/${id}`}>
             <div className="post">
                 <div className="post__avatar">
-                    <Avatar src="https://yt3.ggpht.com/yti/ANoDKi6xkCCtf8mZXcH8iCLgMVoFwJ_Z4xcI-55_wJLrhA=s88-c-k-c0x00ffffff-no-rj-mo" />
+                    <Avatar src={`${config.STATIC_FILES_URL}/${userDetails.profilePic}`} />
                 </div>
                 <div className="post__body">
                     <div className="post__header">
                         <div className="post__headerText">
-                            <h3>Pranav Shinde</h3>
+                            <h3>{userDetails.name}</h3>
                             <span className="post__verified">
                                 <img src={VerifiedIcon.default} alt="" className="verifiedIcon" />
                             </span>

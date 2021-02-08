@@ -43,6 +43,7 @@ const Feed = () => {
                             commentCount={post.commentCount}
                             likeCount={post.likeCount}
                             imageURL={post.imageURL}
+                            userDetails={post.user}
                         />
                     ))
                 )}
@@ -70,6 +71,14 @@ const FETCH_POSTS_QUERY = gql`
                 body
             }
             imageURL
+            user {
+                id
+                email
+                username
+                createdAt
+                name
+                profilePic
+            }
         }
     }
 `;
