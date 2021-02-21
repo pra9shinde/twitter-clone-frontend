@@ -88,3 +88,7 @@
     background-color: rgba(29, 161, 242, 0.1);
     border-radius: 20px;
 }
+
+.post__footer__option.delete {
+    color: crimson;
+}

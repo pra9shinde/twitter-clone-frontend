@@ -4,6 +4,7 @@
     /* background-color: #31404e; */
     background-color: #15202b;
     z-index: 100;
+    min-height: 100vh;
 }
 
 .register .register__backdrop {

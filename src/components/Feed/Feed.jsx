@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
-import "./Feed.css";
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
 
-import TweetBox from "./TweetBox/TweetBox";
-import Post from "./Post/Post";
-import Loader from "../Loader/Loader";
+import './Feed.css';
+
+import TweetBox from './TweetBox/TweetBox';
+import Post from './Post/Post';
+import Loader from '../Loader/Loader';
+
+import { FETCH_POSTS_QUERY } from '../../util/graphqlQueries';
 
 const Feed = () => {
     const [posts, setPosts] = useState([]);
@@ -22,9 +24,9 @@ const Feed = () => {
     };
 
     return (
-        <div className="feed">
-            <div className="feed__wrapper">
-                <div className="feed__header">
+        <div className='feed'>
+            <div className='feed__wrapper'>
+                <div className='feed__header'>
                     <h2>Home</h2>
                 </div>
                 <TweetBox refetch={refreshPosts} />
@@ -41,6 +43,7 @@ const Feed = () => {
                             text={post.body}
                             username={post.username}
                             commentCount={post.commentCount}
+                            likes={post.likes}
                             likeCount={post.likeCount}
                             imageURL={post.imageURL}
                             userDetails={post.user}
@@ -51,36 +54,5 @@ const Feed = () => {
         </div>
     );
 };
-
-const FETCH_POSTS_QUERY = gql`
-    query {
-        getPosts {
-            id
-            body
-            createdAt
-            username
-            likeCount
-            likes {
-                username
-            }
-            commentCount
-            comments {
-                id
-                username
-                createdAt
-                body
-            }
-            imageURL
-            user {
-                id
-                email
-                username
-                createdAt
-                name
-                profilePic
-            }
-        }
-    }
-`;
 
 export default Feed;

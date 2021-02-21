@@ -1,21 +1,21 @@
-import React, { useState, useContext, useRef } from "react";
-import "./TweetBox.css";
-import { Button, Avatar } from "@material-ui/core";
-import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
-import GifIcon from "@material-ui/icons/Gif";
-import PollIcon from "@material-ui/icons/Poll";
-import MoodIcon from "@material-ui/icons/Mood";
-import EventIcon from "@material-ui/icons/Event";
-import Loader from "../../Loader/Loader";
+import React, { useState, useContext, useRef } from 'react';
+import './TweetBox.css';
+import { Button, Avatar } from '@material-ui/core';
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import GifIcon from '@material-ui/icons/Gif';
+import PollIcon from '@material-ui/icons/Poll';
+import MoodIcon from '@material-ui/icons/Mood';
+import EventIcon from '@material-ui/icons/Event';
+import Loader from '../../Loader/Loader';
 
-import { AuthContext } from "../../../context/auth";
-import config from "../../../config";
-import { useMutation, gql } from "@apollo/client";
+import { AuthContext } from '../../../context/auth';
+import config from '../../../config';
+import { useMutation, gql } from '@apollo/client';
 
 const TweetBox = ({ refetch }) => {
     const { user } = useContext(AuthContext);
 
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState('');
     const [showLoader, setShowLoader] = useState(false);
     const [inputFocus, setInputFocus] = useState(false);
     const inputFocusedHandler = () => {
@@ -23,7 +23,7 @@ const TweetBox = ({ refetch }) => {
     };
 
     const [values, setValues] = useState({
-        body: "",
+        body: '',
         image: false,
     });
 
@@ -41,24 +41,23 @@ const TweetBox = ({ refetch }) => {
         setValues({ ...values, image: !values.image });
 
         var oFReader = new FileReader();
-        oFReader.readAsDataURL(document.getElementById("image").files[0]);
+        oFReader.readAsDataURL(document.getElementById('image').files[0]);
 
         oFReader.onload = function (oFREvent) {
-            document.getElementById("uploadPreview").src = oFREvent.target.result;
+            document.getElementById('uploadPreview').src = oFREvent.target.result;
         };
     };
 
     // Apollo POST Request
     const [createPost] = useMutation(CREATE_POST, {
         onCompleted: (res) => {
-            document.getElementById("tweetbox-form").reset();
-            const uploadEl = document.getElementById("uploadPreview");
+            document.getElementById('tweetbox-form').reset();
+            const uploadEl = document.getElementById('uploadPreview');
             if (uploadEl) {
-                uploadEl.src = "";
+                uploadEl.src = '';
             }
             setValues({ ...values, image: false });
             setShowLoader(false);
-
             refetch();
         },
         onError: (err) => {
@@ -66,25 +65,60 @@ const TweetBox = ({ refetch }) => {
             setErrors(displayError);
             setShowLoader(false);
         },
+        update: (proxy, args) => {
+            // Access Cache Data
+            const data = proxy.readQuery({
+                query: gql`
+                    query {
+                        getPosts {
+                            id
+                            body
+                            createdAt
+                            username
+                            likeCount
+                            likes {
+                                username
+                            }
+                            commentCount
+                            comments {
+                                id
+                                username
+                                createdAt
+                                body
+                            }
+                            imageURL
+                            user {
+                                id
+                                email
+                                username
+                                createdAt
+                                name
+                                profilePic
+                            }
+                        }
+                    }
+                `,
+            });
+        },
     });
 
     const postSubmitHandler = (e) => {
         e.preventDefault();
         setShowLoader(true);
-        const fileEl = document.getElementById("image");
+        const fileEl = document.getElementById('image');
         const file = fileEl.files[0];
 
         createPost({ variables: { ...values, image: file } });
     };
 
     return (
-        <div className="tweetBox">
-            <form onSubmit={postSubmitHandler} id="tweetbox-form">
-                <div className={`tweetBox__input ${inputFocus ? "active" : ""}`}>
+        <div className='tweetBox'>
+            <form onSubmit={postSubmitHandler} id='tweetbox-form'>
+                <div className={`tweetBox__input ${inputFocus ? 'active' : ''}`}>
                     <Avatar src={`${config.STATIC_FILES_URL}/${user.profilePic}`} />
                     <input
-                        type="text"
-                        name="body"
+                        type='text'
+                        name='body'
                         placeholder="What's happening?"
                         onFocus={inputFocusedHandler}
                         onBlur={inputFocusedHandler}
@@ -92,41 +126,41 @@ const TweetBox = ({ refetch }) => {
                     />
                 </div>
 
-                <input type="file" name="image" id="image" ref={inputFile} style={{ display: "none" }} onChange={fileDialogChange} />
-                {values.image ? <img alt="" id="uploadPreview" /> : null}
+                <input type='file' name='image' id='image' ref={inputFile} style={{ display: 'none' }} onChange={fileDialogChange} />
+                {values.image ? <img alt='' id='uploadPreview' /> : null}
 
                 {errors && (
-                    <div className="errors">
+                    <div className='errors'>
                         <p>{errors}</p>
                     </div>
                 )}
 
-                <div className="tweetBox__submit">
-                    <div className="tweetBox__submit-left">
-                        <div className="icon" onClick={openFileDialog}>
+                <div className='tweetBox__submit'>
+                    <div className='tweetBox__submit-left'>
+                        <div className='icon' onClick={openFileDialog}>
                             <PhotoLibraryIcon />
                         </div>
-                        <div className="icon">
+                        <div className='icon'>
                             <GifIcon />
                         </div>
 
-                        <div className="icon">
+                        <div className='icon'>
                             <PollIcon />
                         </div>
 
-                        <div className="icon">
+                        <div className='icon'>
                             <MoodIcon />
                         </div>
 
-                        <div className="icon">
+                        <div className='icon'>
                             <EventIcon />
                         </div>
                     </div>
-                    <div className="tweetBox__submit-right">
+                    <div className='tweetBox__submit-right'>
                         {showLoader ? (
                             <Loader />
                         ) : (
-                            <Button type="submit" className="tweetBox__btn">
+                            <Button type='submit' className='tweetBox__btn'>
                                 Tweet
                             </Button>
                         )}
