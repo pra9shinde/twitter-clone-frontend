@@ -11,6 +11,7 @@ import Loader from '../../Loader/Loader';
 import { AuthContext } from '../../../context/auth';
 import config from '../../../config';
 import { useMutation, gql } from '@apollo/client';
+import { FETCH_POSTS_QUERY } from '../../../util/graphqlQueries';
 
 const TweetBox = ({ refetch }) => {
     const { user } = useContext(AuthContext);
@@ -58,47 +59,28 @@ const TweetBox = ({ refetch }) => {
             }
             setValues({ ...values, image: false });
             setShowLoader(false);
-            refetch();
         },
         onError: (err) => {
             const displayError = err.graphQLErrors[0].message ? err.graphQLErrors[0].message : err;
             setErrors(displayError);
             setShowLoader(false);
         },
-        update: (proxy, args) => {
-            // Access Cache Data
+        update: (proxy, result) => {
+            // Access Cache Data so no need to refetch again from server
             const data = proxy.readQuery({
-                query: gql`
-                    query {
-                        getPosts {
-                            id
-                            body
-                            createdAt
-                            username
-                            likeCount
-                            likes {
-                                username
-                            }
-                            commentCount
-                            comments {
-                                id
-                                username
-                                createdAt
-                                body
-                            }
-                            imageURL
-                            user {
-                                id
-                                email
-                                username
-                                createdAt
-                                name
-                                profilePic
-                            }
-                        }
-                    }
-                `,
+                query: FETCH_POSTS_QUERY,
             });
+
+            let newData = [...data.getPosts]; //get old posts from cache
+            newData = [result.data.createPost, ...newData]; //append new post data
+
+            proxy.writeQuery({
+                query: FETCH_POSTS_QUERY,
+                data: {
+                    ...data,
+                    getPosts: { newData },
+                },
+            }); //update cache with newly updated data
         },
     });
 

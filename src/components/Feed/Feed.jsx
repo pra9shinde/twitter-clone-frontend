@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 
 import './Feed.css';
@@ -10,18 +10,7 @@ import Loader from '../Loader/Loader';
 import { FETCH_POSTS_QUERY } from '../../util/graphqlQueries';
 
 const Feed = () => {
-    const [posts, setPosts] = useState([]);
-    const { loading, data, refetch } = useQuery(FETCH_POSTS_QUERY);
-
-    if (data && data.getPosts.length !== posts.length) {
-        //to avoid nonstop re-renders
-        setPosts(data.getPosts);
-    }
-    console.log(posts);
-
-    const refreshPosts = () => {
-        refetch();
-    };
+    const { loading, data } = useQuery(FETCH_POSTS_QUERY);
 
     return (
         <div className='feed'>
@@ -29,13 +18,12 @@ const Feed = () => {
                 <div className='feed__header'>
                     <h2>Home</h2>
                 </div>
-                <TweetBox refetch={refreshPosts} />
+                <TweetBox />
 
                 {loading ? (
                     <Loader />
                 ) : (
-                    posts &&
-                    posts.map((post) => (
+                    data.getPosts.map((post) => (
                         <Post
                             key={post.id}
                             id={post.id}

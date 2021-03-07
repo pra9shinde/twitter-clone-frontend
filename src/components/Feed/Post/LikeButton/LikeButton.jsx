@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 import './LikeButton.css';
 import { FavoriteBorder } from '@material-ui/icons';
+import { AuthContext } from '../../../../context/auth';
 
-const LikeButton = ({ post, user }) => {
+const LikeButton = ({ post }) => {
+    const { user } = useContext(AuthContext);
+
     const [liked, setLiked] = useState(false);
 
     const [likePost] = useMutation(LIKE_MUTATION, {
@@ -26,7 +29,6 @@ const LikeButton = ({ post, user }) => {
     }, [user, post.likes]);
 
     const likeHandler = () => {
-        console.log('liked');
         likePost({ variables: { postId: post.id } });
     };
 

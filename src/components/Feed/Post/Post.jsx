@@ -17,10 +17,6 @@ const VerifiedIcon = require('../../../assets/images/twitter-verified-badge.svg'
 const Post = ({ id, username, verified, text, likeCount, commentCount, likes, createdAt, imageURL, userDetails }) => {
     const { user } = useContext(AuthContext);
 
-    function commentHandler() {
-        console.log('Comment Handler');
-    }
-
     return (
         <div className='post'>
             <div className='post__avatar'>
@@ -37,14 +33,16 @@ const Post = ({ id, username, verified, text, likeCount, commentCount, likes, cr
                             @{username} · {moment(new Date(createdAt)).fromNow()}
                         </span>
                     </div>
-                    <div className='postHeaderDesc'>
-                        <p>{text}</p>
-                        {imageURL && <img src={`${config.STATIC_FILES_URL}/${imageURL}`} alt='' className='post__image' />}
-                    </div>
+                    <Link to={`/posts/${id}`}>
+                        <div className='postHeaderDesc'>
+                            <p>{text}</p>
+                            {imageURL && <img src={`${config.STATIC_FILES_URL}/${imageURL}`} alt='' className='post__image' />}
+                        </div>
+                    </Link>
                 </div>
                 <div className='post__footer'>
                     <Link to={`/posts/${id}`}>
-                        <div className='post__footer__option' onClick={commentHandler}>
+                        <div className='post__footer__option'>
                             <ChatBubbleOutline fontSize='small' />
                             <span>{commentCount}</span>
                         </div>
@@ -54,7 +52,7 @@ const Post = ({ id, username, verified, text, likeCount, commentCount, likes, cr
                         <span>1</span>
                     </div>
 
-                    <LikeButton post={{ id, likes, likeCount }} user={user} />
+                    <LikeButton post={{ id, likes, likeCount }} />
 
                     <div className='post__footer__option'>
                         <ShareIcon fontSize='small' />
