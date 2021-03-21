@@ -5,7 +5,6 @@
 
 .post {
     display: flex;
-    padding-bottom: 10px;
     align-items: flex-start;
     border-bottom: 1px solid var(--twitter-background);
 }
@@ -13,6 +12,7 @@
 .post__body {
     flex: 1;
     padding: 10px;
+    padding-bottom: 0px;
 }
 
 .post__headerText {
@@ -41,8 +41,9 @@
 }
 
 .postHeaderDesc {
-    margin-bottom: 10px;
+    margin: 5px 0;
     font-size: 15px;
+    max-width: 500px;
 }
 
 .post__image {
@@ -60,7 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    max-width: 600px;
+    max-width: 500px;
     width: 100%;
 }
 
@@ -70,6 +71,11 @@
     padding: 5px 10px;
     align-items: center;
     transition: all 0.2s ease-in;
+    color: #767c7f;
+}
+
+.post__footer__option .MuiSvgIcon-root {
+    font-size: 23px;
 }
 
 .post__footer__option span {
@@ -91,4 +97,44 @@
 
 .post__footer__option.delete {
     color: crimson;
+}
+
+.post__footer__like__btn {
+    display: flex;
+    align-items: center;
+}
+
+.post__footer__like__btn span {
+    margin-top: 3px;
+    margin-left: -6px;
+    color: #5d6165;
+}
+
+/* Twitter Like BTN */
+.like-btn-svg {
+    width: 50px;
+    height: 50px;
+    background: url(http://localhost:4000/uploads/images/web_heart_animation.png) no-repeat;
+    background-position: -20px -10px;
+    cursor: pointer;
+    /* transform: translate(-40px, -1px); */
+}
+
+.like-btn-svg.active {
+    background-position: -1952px -10px;
+}
+
+.like-btn-svg.animate {
+    transition: background 1s steps(28);
+    animation: fave-like-btn-svg 1s steps(28);
+    background-position: -1952px -10px;
+}
+
+@keyframes fave-like-btn-svg {
+    0% {
+        background-position: -20px -10px;
+    }
+    100% {
+        background-position: -1952px -10px;
+    }
 }

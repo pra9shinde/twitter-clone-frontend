@@ -6,6 +6,7 @@ import './Feed.css';
 import TweetBox from './TweetBox/TweetBox';
 import Post from './Post/Post';
 import Loader from '../Loader/Loader';
+import ServerDownError from '../ServerDownError/ServerDownError';
 
 import { FETCH_POSTS_QUERY } from '../../util/graphqlQueries';
 
@@ -23,20 +24,26 @@ const Feed = () => {
                 {loading ? (
                     <Loader />
                 ) : (
-                    data.getPosts.map((post) => (
-                        <Post
-                            key={post.id}
-                            id={post.id}
-                            createdAt={post.createdAt}
-                            text={post.body}
-                            username={post.username}
-                            commentCount={post.commentCount}
-                            likes={post.likes}
-                            likeCount={post.likeCount}
-                            imageURL={post.imageURL}
-                            userDetails={post.user}
-                        />
-                    ))
+                    <>
+                        {data ? (
+                            data.getPosts.map((post) => (
+                                <Post
+                                    key={post.id}
+                                    id={post.id}
+                                    createdAt={post.createdAt}
+                                    text={post.body}
+                                    username={post.username}
+                                    commentCount={post.commentCount}
+                                    likes={post.likes}
+                                    likeCount={post.likeCount}
+                                    imageURL={post.imageURL}
+                                    userDetails={post.user}
+                                />
+                            ))
+                        ) : (
+                            <ServerDownError />
+                        )}
+                    </>
                 )}
             </div>
         </div>

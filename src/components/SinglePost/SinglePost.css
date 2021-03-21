@@ -11,14 +11,11 @@
     border-bottom: 1px solid rgb(235, 238, 240);
 }
 
-.singlePost__body {
-    padding: 10px;
-    padding-bottom: 0px;
-}
-
 .singlePost__header {
     display: flex;
     align-items: center;
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
 .singlePost__avatar {
@@ -42,9 +39,15 @@
     align-items: flex-start;
 }
 
+.singlePost__header-top h3 {
+    font-size: 14px;
+}
+
 .postHeaderDesc.singlePost {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 20px;
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
 .singlePost__timestamp {
@@ -61,10 +64,9 @@
 .singlePost__footer-top {
     display: flex;
     align-items: center;
-
     border-top: 1px solid rgb(235, 238, 240);
     border-bottom: 1px solid rgb(235, 238, 240);
-    padding: 15px 5px;
+    padding: 15px 10px;
 }
 
 .singlePost__footer-top .item {
@@ -82,4 +84,26 @@
     align-items: center;
     justify-content: space-around;
     padding: 10px 0px;
+    border-bottom: 1px solid rgb(235, 238, 240);
+}
+
+.single__post__notfound {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.single__post__notfound h3 {
+    color: var(--twitter-color);
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 25px;
+}
+
+.single__post__notfound img {
+    width: 100%;
+    margin-top: 20px;
 }

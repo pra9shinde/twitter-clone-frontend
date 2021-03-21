@@ -10,10 +10,13 @@ const LikeButton = ({ post }) => {
     const { user } = useContext(AuthContext);
 
     const [liked, setLiked] = useState(false);
+    const [animate, setAnimate] = useState(false);
 
     const [likePost] = useMutation(LIKE_MUTATION, {
         onCompleted: (res) => {
-            console.log(res);
+            setAnimate(true);
+            setLiked(!liked);
+            setAnimate(false);
         },
         onError: (err) => {
             console.log(err);
@@ -23,6 +26,7 @@ const LikeButton = ({ post }) => {
     useEffect(() => {
         if (user && post.likes.find((like) => like.username === user.username)) {
             setLiked(true);
+            setAnimate(false);
         } else {
             setLiked(false);
         }
@@ -30,17 +34,24 @@ const LikeButton = ({ post }) => {
 
     const likeHandler = () => {
         likePost({ variables: { postId: post.id } });
+        if (liked) {
+            setAnimate(false);
+        }
     };
 
     return user ? (
-        <div className={`post__footer__option like ${liked ? 'active' : ''}`} onClick={likeHandler}>
-            <FavoriteBorder fontSize='small' />
+        <div className='post__footer__like__btn '>
+            <div className={`like-btn-svg ${liked ? 'active animate' : ''}`} onClick={likeHandler}></div>
             <span>{post.likeCount}</span>
         </div>
     ) : (
+        // <div className={`post__footer__option like ${liked ? 'active' : ''}`} onClick={likeHandler}>
+        //     <FavoriteBorder fontSize='small' />
+        //     <span>{post.likeCount}</span>
+        // </div>
         <Link to='/login'>
-            <div className={`post__footer__option like`}>
-                <FavoriteBorder fontSize='small' />
+            <div className='post__footer__like__btn '>
+                <div className={`like-btn-svg`}></div>
                 <span>{post.likeCount}</span>
             </div>
         </Link>

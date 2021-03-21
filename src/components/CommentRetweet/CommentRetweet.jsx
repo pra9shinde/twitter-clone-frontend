@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './CommentRetweet.css';
 
 import CloseIcon from '@material-ui/icons/Close';
@@ -10,12 +10,10 @@ import { CSSTransition } from 'react-transition-group';
 import VerifiedIcon from '../../assets/images/twitter-verified-badge.svg';
 
 const CommentRetweet = ({ showModal, toggleModal }) => {
-    const overlayArea = useRef();
-
     return (
         <CSSTransition in={showModal} appear={showModal} unmountOnExit={true} mountOnEnter={true} timeout={600} classNames='fade'>
             <div className='modal__overlay' onClick={(e) => toggleModal(e, true)}>
-                <div className='modal__wrapper' id='modal__overlay' ref={overlayArea}>
+                <div className='modal__wrapper' id='modal__overlay'>
                     <div className='modal'>
                         <div className='modal__container'>
                             <div className='modal__header modal-padd'>
