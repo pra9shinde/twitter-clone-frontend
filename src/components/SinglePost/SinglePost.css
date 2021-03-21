@@ -1,0 +1,85 @@
+.feed__header-back-btn {
+    margin-right: 30px;
+    color: var(--twitter-color);
+}
+
+.feed__header.singlePost {
+    padding: 10px 5px;
+}
+
+.singlePost__container {
+    border-bottom: 1px solid rgb(235, 238, 240);
+}
+
+.singlePost__body {
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.singlePost__header {
+    display: flex;
+    align-items: center;
+}
+
+.singlePost__avatar {
+    margin-right: 10px;
+}
+
+.singlePost__avatar .MuiAvatar-root {
+    width: 50px;
+    height: 50px;
+}
+
+.singlePost__header-top {
+    display: flex;
+    align-items: center;
+}
+
+.post__headerText.singlePost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.postHeaderDesc.singlePost {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.singlePost__timestamp {
+    margin: 10px 0;
+    font-size: 14px;
+    color: gray;
+}
+
+.singlePost__footer {
+    margin: 20px 0;
+    margin-bottom: 0px;
+}
+
+.singlePost__footer-top {
+    display: flex;
+    align-items: center;
+
+    border-top: 1px solid rgb(235, 238, 240);
+    border-bottom: 1px solid rgb(235, 238, 240);
+    padding: 15px 5px;
+}
+
+.singlePost__footer-top .item {
+    margin-right: 20px;
+    color: gray;
+}
+
+.singlePost__footer-top .item span {
+    color: #000;
+    font-weight: 600;
+}
+
+.singlePost__footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+}

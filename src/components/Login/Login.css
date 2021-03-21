@@ -72,7 +72,7 @@
 .fade-enter.fade-enter-active {
     opacity: 1;
     transform: translateY(0);
-    transition: all 600ms ease-in;
+    transition: all 600ms ease-in-out;
 }
 
 /* Fade -: When component is removed */
@@ -83,7 +83,7 @@
 .fade-exit-active {
     opacity: 0;
     transform: translateY(-100%);
-    transition: all 600ms ease-in;
+    transition: all 600ms ease-in-out;
 }
 
 /*------------ Animation using react transition group ---------*/

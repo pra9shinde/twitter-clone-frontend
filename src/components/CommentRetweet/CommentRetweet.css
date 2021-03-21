@@ -1,0 +1,91 @@
+.modal__overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+}
+
+.modal__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+    z-index: 999;
+    min-height: 250px;
+    background-color: white;
+    border-radius: 15px;
+    max-width: 600px;
+}
+
+.modal-padd {
+    padding: 10px;
+}
+
+.modal__body {
+    padding-bottom: 0;
+}
+
+.modal__header {
+    border-bottom: 1px solid rgb(196, 207, 214);
+}
+
+.post__footer__option.modal__close-btn {
+    width: 45px;
+}
+
+.post__footer__option.modal__close-btn .MuiSvgIcon-root {
+    color: var(--twitter-color);
+}
+
+.modal__profilePic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post__avatar.modalStyle {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.modal__vertical__line {
+    width: 2px;
+    min-height: 100px;
+    background-color: #c4cfd6;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.modal__post {
+    display: flex;
+    align-items: flex-start;
+}
+
+.modal__replyingTo {
+    color: gray;
+    font-size: 13px;
+}
+
+.modal__replyingTo span {
+    color: var(--twitter-color);
+    cursor: pointer;
+}
+
+.modal .tweetBox .tweetBox__input {
+    padding-left: 2px;
+    background: none;
+}
+
+.modal .tweetBox {
+    padding-top: 0;
+}

@@ -20,6 +20,8 @@
     z-index: 100;
     border-bottom: 1px solid var(--twitter-background);
     padding: 15px 20px;
+    display: flex;
+    align-items: center;
 }
 
 .feed__header > h2 {

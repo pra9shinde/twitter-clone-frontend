@@ -13,7 +13,7 @@ import config from '../../../config';
 import { useMutation, gql } from '@apollo/client';
 import { FETCH_POSTS_QUERY } from '../../../util/graphqlQueries';
 
-const TweetBox = ({ refetch }) => {
+const TweetBox = ({ modal }) => {
     const { user } = useContext(AuthContext);
 
     const [errors, setErrors] = useState('');
@@ -101,7 +101,7 @@ const TweetBox = ({ refetch }) => {
                     <input
                         type='text'
                         name='body'
-                        placeholder="What's happening?"
+                        placeholder={modal ? 'Tweet your reply' : "What's happening?"}
                         onFocus={inputFocusedHandler}
                         onBlur={inputFocusedHandler}
                         onChange={inputChangeHandler}
