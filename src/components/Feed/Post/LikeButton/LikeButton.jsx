@@ -3,7 +3,6 @@ import { useMutation, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 import './LikeButton.css';
-import { FavoriteBorder } from '@material-ui/icons';
 import { AuthContext } from '../../../../context/auth';
 
 const LikeButton = ({ post }) => {

@@ -6,11 +6,11 @@ import './Post.css';
 import { Avatar } from '@material-ui/core';
 import { ChatBubbleOutline, Repeat } from '@material-ui/icons';
 import ShareIcon from '@material-ui/icons/Share';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import config from '../../../config';
 
 import { AuthContext } from '../../../context/auth';
 import LikeButton from './LikeButton/LikeButton';
+import DeleteButton from './DeleteButton/DeleteButton';
 
 const VerifiedIcon = require('../../../assets/images/twitter-verified-badge.svg');
 
@@ -57,11 +57,7 @@ const Post = ({ id, username, verified, text, likeCount, commentCount, likes, cr
                     <div className='post__footer__option'>
                         <ShareIcon fontSize='small' />
                     </div>
-                    {user && username === user.username && (
-                        <div className='post__footer__option delete'>
-                            <DeleteOutlineIcon fontSize='small' />
-                        </div>
-                    )}
+                    {user && username === user.username && <DeleteButton postId={id} />}
                 </div>
             </div>
         </div>

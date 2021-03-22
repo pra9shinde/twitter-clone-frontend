@@ -24,6 +24,7 @@
     background-color: white;
     border-radius: 15px;
     max-width: 600px;
+    min-width: 350px;
 }
 
 .modal-padd {
@@ -36,10 +37,21 @@
 
 .modal__header {
     border-bottom: 1px solid rgb(196, 207, 214);
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    padding-right: 10px;
+}
+
+.modal__header h5 {
+    color: var(--twitter-color);
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .post__footer__option.modal__close-btn {
-    width: 45px;
+    min-width: 45px;
+    /* padding: 0px; */
 }
 
 .post__footer__option.modal__close-btn .MuiSvgIcon-root {
@@ -87,5 +99,6 @@
 }
 
 .modal .tweetBox {
-    padding-top: 0;
+    padding: 0;
+    padding-bottom: 10px;
 }
