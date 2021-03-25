@@ -18,7 +18,7 @@ const SidebarModal = () => {
                     <h6>{user.name}</h6>
                     <p>{user.username}</p>
                 </div>
-                <div className="sidebar__logout__more modal">
+                <div className="sidebar__logout__more">
                     <CheckIcon />
                 </div>
             </div>

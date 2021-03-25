@@ -24,7 +24,7 @@
     background-color: white;
     border-radius: 15px;
     max-width: 600px;
-    min-width: 350px;
+    min-width: 450px;
 }
 
 .modal-padd {
@@ -72,7 +72,6 @@
 
 .modal__vertical__line {
     width: 2px;
-    min-height: 100px;
     background-color: #c4cfd6;
     margin-right: 10px;
     margin-top: 5px;
@@ -86,6 +85,7 @@
 .modal__replyingTo {
     color: gray;
     font-size: 13px;
+    margin: 10px 0;
 }
 
 .modal__replyingTo span {

@@ -37,19 +37,17 @@ const DeleteButton = ({ postId, callback }) => {
                 query: FETCH_POSTS_QUERY,
             });
 
+           if(data){
+            let newData = data.getPosts.filter((p) => p.id !== postId); //get old posts from cache except this post
 
-            console.log(FETCH_POSTS_QUERY);
-
-            // let newData = data.getPosts.filter((p) => p.id !== postId); //get old posts from cache except this post
-            // newData = [result.data.createPost, ...newData];
-
-            // proxy.writeQuery({
-            //     query: FETCH_POSTS_QUERY,
-            //     data: {
-            //         ...data,
-            //         getPosts: { newData },
-            //     },
-            // }); //update cache with newly updated data
+            proxy.writeQuery({
+                query: FETCH_POSTS_QUERY,
+                data: {
+                    ...data,
+                    getPosts: { newData },
+                },
+            }); //update cache with newly updated data
+           }
         },
     });
 

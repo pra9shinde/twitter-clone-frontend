@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect  } from 'react';
+import { useHistory } from "react-router-dom";
 import './SinglePost.css';
 
 import { gql, useQuery } from '@apollo/client';
@@ -8,7 +9,6 @@ import moment from 'moment';
 
 import { ChatBubbleOutline, Repeat } from '@material-ui/icons';
 import ShareIcon from '@material-ui/icons/Share';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PostNotFoundImg from '../../assets/images/post-not-found.svg';
 import VerifiedIcon from '../../assets/images/twitter-verified-badge.svg';
@@ -26,10 +26,14 @@ import { AuthContext } from '../../context/auth';
 import DeleteButton from '../Feed/Post/DeleteButton/DeleteButton';
 
 const SinglePost = (props) => {
-    const postId = props.match.params.postId;
+    const history = useHistory();
+    const ref = useRef(null);
 
-    const { user } = useContext(AuthContext);
+    const [height, setHeight] = useState(0);
     const [showModal, setshowModal] = useState(false);
+
+    const postId = props.match.params.postId;
+    const { user } = useContext(AuthContext);
 
     const toggleModal = (e, overlay) => {
         if (overlay) {
@@ -44,10 +48,16 @@ const SinglePost = (props) => {
     };
 
     const { data, loading } = useQuery(FETCH_POST, { variables: { postId } });
-
+  
     const deleteCallback = () => {
         props.history.push('/');
     };
+
+    useEffect(() => {
+        if(showModal){
+            setHeight(ref.current.clientHeight - 20);
+        }
+    }, [showModal]);
 
     return (
         <>
@@ -56,10 +66,8 @@ const SinglePost = (props) => {
                 <div className='feed'>
                     <div className='feed__wrapper'>
                         <div className='feed__header singlePost'>
-                            <div className='feed__header-back-btn post__footer__option'>
-                                <Link to='/'>
-                                    <ArrowBackIcon />
-                                </Link>
+                            <div className='feed__header-back-btn post__footer__option' onClick={() => history.goBack()}>
+                                <ArrowBackIcon />
                             </div>
                             <h2>Tweet</h2>
                         </div>
@@ -140,72 +148,55 @@ const SinglePost = (props) => {
                                                 </div>
                                             </div>
 
-                                            {data.getPost.comments.forEach((comment) => {
+                                            {data.getPost.comments.map((comment) => (
                                                 <Post
-                                                    id='6044d867d18c7103e85002aa'
-                                                    createdAt='2021-02-08T06:36:00.237Z'
-                                                    text='First Tweet!!!!'
-                                                    username='test'
-                                                    commentCount='10'
-                                                    likes={[{ username: 'pra9shinde' }]}
-                                                    likeCount='10'
-                                                    userDetails={{
-                                                        email: 'test@test.com',
-                                                        username: 'qwe',
-                                                        name: 'test',
-                                                        profilePic: 'http://localhost:4000/uploads/images/pranav.jpg',
-                                                        createdAt: '2021-02-03T04:54:39.615Z',
-                                                    }}
-                                                />;
-                                            })}
-
-                                            <Post
-                                                id='6044d867d18c7103e85002aa'
-                                                createdAt='2021-02-08T06:36:00.237Z'
-                                                text='First Tweet!!!!'
-                                                username='test'
-                                                commentCount='10'
-                                                likes={[{ username: 'pra9shinde' }]}
-                                                likeCount='10'
-                                                userDetails={{
-                                                    email: 'test@test.com',
-                                                    username: 'qwe',
-                                                    name: 'test',
-                                                    profilePic: 'http://localhost:4000/uploads/images/pranav.jpg',
-                                                    createdAt: '2021-02-03T04:54:39.615Z',
-                                                }}
-                                            />
+                                                    key={comment.id}
+                                                    id={comment.id}
+                                                    username={comment.username}
+                                                    text={comment.body}
+                                                    likeCount={comment.likeCount}
+                                                    commentCount={comment.commentCount}
+                                                    likes={comment.likes}
+                                                    createdAt={comment.createdAt}
+                                                    imageURL={comment.imageURL}
+                                                    userDetails={comment.user}
+                                                />
+                                            ))}
                                         </div>
 
                                         {/* Reply Modal */}
                                         <Modal showModal={showModal} toggleModal={toggleModal}>
-                                            <div className='modal__post'>
+                                            <div className='modal__post' ref={ref} >
                                                 <div className='modal__profilePic'>
                                                     <div className='post__avatar modalStyle'>
-                                                        <Avatar src='' />
+                                                        <Avatar src={`${config.STATIC_FILES_URL}/${data.getPost.user.profilePic}`} />
                                                     </div>
-                                                    <div className='modal__vertical__line'></div>
+                                                    <div className='modal__vertical__line' style={{height: height}} ></div>
                                                 </div>
 
                                                 <div className='post__header'>
                                                     <div className='post__headerText'>
-                                                        <h3>Pranav Shinde</h3>
+                                                        <h3>{data.getPost.user.name}</h3>
                                                         <span className='post__verified'>
                                                             <img src={VerifiedIcon} alt='' className='verifiedIcon' />
                                                         </span>
-                                                        <span className='post__username'>@pra9shinde · 33m</span>
+                                                        <span className='post__username'>@{data.getPost.user.username} · {moment(new Date(data.getPost.createdAt)).fromNow()}</span>
                                                     </div>
                                                     <div className='postHeaderDesc'>
                                                         <p>
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam dicta quas vero nemo sed
-                                                            minima aliquam, mollitia facere animi quibusdam sapiente itaque minus iusto dignissimos
-                                                            ipsum inventore magni velit suscipit.
+                                                            {data.getPost.body}
                                                         </p>
-                                                        {/* {imageURL && <img src={`${config.STATIC_FILES_URL}/${imageURL}`} alt='' className='post__image' />} */}
+                                                        {data.getPost.imageURL && (
+                                                            <img
+                                                                src={`${config.STATIC_FILES_URL}/${data.getPost.imageURL}`}
+                                                                alt=''
+                                                                className='post__image'
+                                                            />
+                                                        )}
                                                     </div>
                                                     <div className='modal__replyingTo'>
                                                         <p>
-                                                            Replying to <span>@pra9shinde</span>
+                                                            Replying to <span>@{data.getPost.user.username}</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -242,11 +233,25 @@ const FETCH_POST = gql`
                 username
             }
             commentCount
-            comments {
+            comments{
                 id
-                username
-                createdAt
                 body
+                createdAt
+                username
+                likes{
+                    id
+                    username
+                }
+                likeCount
+                commentCount
+                imageURL
+                user{
+                    id
+                    email
+                    username
+                    name
+                    profilePic
+                }
             }
             imageURL
             user {

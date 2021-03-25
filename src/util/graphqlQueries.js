@@ -12,12 +12,6 @@ export const FETCH_POSTS_QUERY = gql`
                 username
             }
             commentCount
-            comments {
-                id
-                username
-                createdAt
-                body
-            }
             imageURL
             user {
                 id

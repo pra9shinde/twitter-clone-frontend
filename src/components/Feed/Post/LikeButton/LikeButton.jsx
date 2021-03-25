@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './LikeButton.css';
 import { AuthContext } from '../../../../context/auth';
 
+
 const LikeButton = ({ post }) => {
     const { user } = useContext(AuthContext);
 

@@ -20,6 +20,10 @@
     align-items: center;
 }
 
+.post__headerText h3{
+    font-size: 14px;
+}
+
 .post__avatar {
     margin: 15px 0 0 10px;
     width: 40px;
