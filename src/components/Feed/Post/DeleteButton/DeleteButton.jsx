@@ -8,7 +8,7 @@ import Modal from '../../../Modal/Modal';
 
 import { FETCH_POSTS_QUERY } from '../../../../util/graphqlQueries';
 
-const DeleteButton = ({ postId, callback }) => {
+const DeleteButton = ({ postId, callback, isComment, parentPostId }) => {
     const [showModal, setshowModal] = useState(false);
 
     const toggleModal = (e, overlay) => {
@@ -27,32 +27,45 @@ const DeleteButton = ({ postId, callback }) => {
         variables: { postId },
         onCompleted: (res) => {
             setshowModal(false);
-            if (callback) {
-                callback();
-            }
         },
+        onError: (err) => console.log(err),
         update: (proxy, result) => {
             // Remove Post from Cache
             const data = proxy.readQuery({
                 query: FETCH_POSTS_QUERY,
             });
 
-           if(data){
-            let newData = data.getPosts.filter((p) => p.id !== postId); //get old posts from cache except this post
+            if (data) {
+                let newData = data.getPosts.filter((p) => p.id !== postId); //get old posts from cache except this post
 
-            proxy.writeQuery({
-                query: FETCH_POSTS_QUERY,
-                data: {
-                    ...data,
-                    getPosts: { newData },
-                },
-            }); //update cache with newly updated data
-           }
+                proxy.writeQuery({
+                    query: FETCH_POSTS_QUERY,
+                    data: {
+                        ...data,
+                        getPosts: { newData },
+                    },
+                }); //update cache with newly updated data
+            }
         },
     });
 
+    const [deletePostComment] = useMutation(DELETE_POST_COMMENT_MUTATION, {
+        variables: { parentPostId: parentPostId, commentId: postId },
+        update: (proxy, result) => {
+            console.log('comment deleted successfully');
+        },
+        onError: (e) => console.log(e),
+    });
+
     const deleteHandler = () => {
+        if (isComment && parentPostId) {
+            //Comment is deleted from singlePost
+            deletePostComment();
+        }
         deletePost();
+        if (callback) {
+            callback();
+        }
     };
 
     return (
@@ -88,6 +101,19 @@ const DeleteButton = ({ postId, callback }) => {
 const DELETE_POST_MUTATION = gql`
     mutation deletePost($postId: ID!) {
         deletePost(postId: $postId)
+    }
+`;
+
+const DELETE_POST_COMMENT_MUTATION = gql`
+    mutation deletePostComment($parentPostId: ID!, $commentId: ID!) {
+        deletePostComment(parentPostId: $parentPostId, commentId: $commentId) {
+            id
+            body
+            comments {
+                id
+                body
+            }
+        }
     }
 `;
 

@@ -50,7 +50,7 @@ const SinglePost = (props) => {
     const { data, loading } = useQuery(FETCH_POST, { variables: { postId } });
   
     const deleteCallback = () => {
-        props.history.push('/');
+        history.goBack();
     };
 
     useEffect(() => {
@@ -160,6 +160,8 @@ const SinglePost = (props) => {
                                                     createdAt={comment.createdAt}
                                                     imageURL={comment.imageURL}
                                                     userDetails={comment.user}
+                                                    isComment={true}
+                                                    parentPostId={data.getPost.id}
                                                 />
                                             ))}
                                         </div>
