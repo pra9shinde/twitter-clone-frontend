@@ -1,10 +1,9 @@
-import React, { useContext, useState, useRef, useEffect  } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import './SinglePost.css';
 
 import { gql, useQuery } from '@apollo/client';
 import { Avatar } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import { ChatBubbleOutline, Repeat } from '@material-ui/icons';
@@ -48,16 +47,20 @@ const SinglePost = (props) => {
     };
 
     const { data, loading } = useQuery(FETCH_POST, { variables: { postId } });
-  
+
     const deleteCallback = () => {
         history.goBack();
     };
 
+    const createCommentCallback = () => {
+        setshowModal(false);
+    };
+
     useEffect(() => {
-        if(showModal){
+        if (showModal) {
             setHeight(ref.current.clientHeight - 20);
         }
-    }, [showModal]);
+    }, [showModal, data]);
 
     return (
         <>
@@ -168,12 +171,12 @@ const SinglePost = (props) => {
 
                                         {/* Reply Modal */}
                                         <Modal showModal={showModal} toggleModal={toggleModal}>
-                                            <div className='modal__post' ref={ref} >
+                                            <div className='modal__post' ref={ref}>
                                                 <div className='modal__profilePic'>
                                                     <div className='post__avatar modalStyle'>
                                                         <Avatar src={`${config.STATIC_FILES_URL}/${data.getPost.user.profilePic}`} />
                                                     </div>
-                                                    <div className='modal__vertical__line' style={{height: height}} ></div>
+                                                    <div className='modal__vertical__line' style={{ height: height }}></div>
                                                 </div>
 
                                                 <div className='post__header'>
@@ -182,12 +185,12 @@ const SinglePost = (props) => {
                                                         <span className='post__verified'>
                                                             <img src={VerifiedIcon} alt='' className='verifiedIcon' />
                                                         </span>
-                                                        <span className='post__username'>@{data.getPost.user.username} · {moment(new Date(data.getPost.createdAt)).fromNow()}</span>
+                                                        <span className='post__username'>
+                                                            @{data.getPost.user.username} · {moment(new Date(data.getPost.createdAt)).fromNow()}
+                                                        </span>
                                                     </div>
                                                     <div className='postHeaderDesc'>
-                                                        <p>
-                                                            {data.getPost.body}
-                                                        </p>
+                                                        <p>{data.getPost.body}</p>
                                                         {data.getPost.imageURL && (
                                                             <img
                                                                 src={`${config.STATIC_FILES_URL}/${data.getPost.imageURL}`}
@@ -204,7 +207,7 @@ const SinglePost = (props) => {
                                                 </div>
                                             </div>
 
-                                            <TweetBox modal={true} />
+                                            <TweetBox modal={true} isComment={true} replyingTo={data.getPost.id} callback={createCommentCallback} />
                                         </Modal>
                                     </>
                                 ) : (
@@ -235,19 +238,19 @@ const FETCH_POST = gql`
                 username
             }
             commentCount
-            comments{
+            comments {
                 id
                 body
                 createdAt
                 username
-                likes{
+                likes {
                     id
                     username
                 }
                 likeCount
                 commentCount
                 imageURL
-                user{
+                user {
                     id
                     email
                     username

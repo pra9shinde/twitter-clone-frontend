@@ -13,7 +13,7 @@ import config from '../../../config';
 import { useMutation, gql } from '@apollo/client';
 import { FETCH_POSTS_QUERY } from '../../../util/graphqlQueries';
 
-const TweetBox = ({ modal }) => {
+const TweetBox = ({ modal, isComment, replyingTo, callback }) => {
     const { user } = useContext(AuthContext);
 
     const [errors, setErrors] = useState('');
@@ -59,11 +59,13 @@ const TweetBox = ({ modal }) => {
             }
             setValues({ ...values, image: false });
             setShowLoader(false);
+            if (callback) callback(); //close the comment modal
         },
         onError: (err) => {
             const displayError = err.graphQLErrors[0].message ? err.graphQLErrors[0].message : err;
             setErrors(displayError);
             setShowLoader(false);
+            if (callback) callback(); //close the comment modal
         },
         update: (proxy, result) => {
             // Access Cache Data so no need to refetch again from server
@@ -71,16 +73,18 @@ const TweetBox = ({ modal }) => {
                 query: FETCH_POSTS_QUERY,
             });
 
-            let newData = [...data.getPosts]; //get old posts from cache
-            newData = [result.data.createPost, ...newData]; //append new post data
+            if (data) {
+                let newData = [...data.getPosts]; //get old posts from cache
+                newData = [result.data.createPost, ...newData]; //append new post data
 
-            proxy.writeQuery({
-                query: FETCH_POSTS_QUERY,
-                data: {
-                    ...data,
-                    getPosts: { newData },
-                },
-            }); //update cache with newly updated data
+                proxy.writeQuery({
+                    query: FETCH_POSTS_QUERY,
+                    data: {
+                        ...data,
+                        getPosts: { newData },
+                    },
+                }); //update cache with newly updated data
+            }
         },
     });
 
@@ -90,7 +94,11 @@ const TweetBox = ({ modal }) => {
         const fileEl = document.getElementById('image');
         const file = fileEl.files[0];
 
-        createPost({ variables: { ...values, image: file } });
+        if (isComment && replyingTo) {
+            createPost({ variables: { ...values, image: file, isComment, replyingTo } });
+        } else {
+            createPost({ variables: { ...values, image: file } });
+        }
     };
 
     return (
@@ -154,8 +162,8 @@ const TweetBox = ({ modal }) => {
 };
 
 const CREATE_POST = gql`
-    mutation createPost($body: String!, $image: Upload) {
-        createPost(body: $body, image: $image) {
+    mutation createPost($body: String!, $image: Upload, $isComment: Boolean, $replyingTo: ID) {
+        createPost(body: $body, image: $image, isComment: $isComment, replyingTo: $replyingTo) {
             id
             body
             createdAt
@@ -174,6 +182,8 @@ const CREATE_POST = gql`
             }
             commentCount
             imageURL
+            isComment
+            replyingTo
         }
     }
 `;
