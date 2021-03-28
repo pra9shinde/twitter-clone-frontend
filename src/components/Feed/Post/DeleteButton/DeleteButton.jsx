@@ -6,7 +6,7 @@ import { gql, useMutation } from '@apollo/client';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import Modal from '../../../Modal/Modal';
 
-import { FETCH_POSTS_QUERY } from '../../../../util/graphqlQueries';
+import { FETCH_POSTS_QUERY, FETCH_POST } from '../../../../util/graphqlQueries';
 
 const DeleteButton = ({ postId, callback, isComment, parentPostId }) => {
     const [showModal, setshowModal] = useState(false);
@@ -52,7 +52,28 @@ const DeleteButton = ({ postId, callback, isComment, parentPostId }) => {
     const [deletePostComment] = useMutation(DELETE_POST_COMMENT_MUTATION, {
         variables: { parentPostId: parentPostId, commentId: postId },
         update: (proxy, result) => {
-            console.log('comment deleted successfully');
+            // Update single post cache
+            const data = proxy.readQuery({
+                query: FETCH_POST,
+                variables: {
+                    // Provide any required variables here
+                    postId: parentPostId,
+                },
+            });
+
+            if (data) {
+                proxy.writeQuery({
+                    query: FETCH_POST,
+                    variables: {
+                        // Provide any required variables here
+                        postId: parentPostId,
+                    },
+                    data: {
+                        ...data,
+                        getPost: { ...data.getPost, commentCount: data.getPost.comments.length },
+                    },
+                }); //update cache with newly updated data
+            }
         },
         onError: (e) => console.log(e),
     });

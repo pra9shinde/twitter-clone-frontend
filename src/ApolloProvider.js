@@ -1,17 +1,17 @@
-import React from "react";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { createUploadLink } from "apollo-upload-client"; //Used to upload files
-import config from "./config";
-import { setContext as apolloContext } from "apollo-link-context"; //Required to pass auth headers for each comp
+import React from 'react';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client'; //Used to upload files
+import config from './config';
+import { setContext as apolloContext } from 'apollo-link-context'; //Required to pass auth headers for each comp
 
-import App from "./App";
+import App from './App';
 
 // Bind Authentication header to each request
 const authLink = apolloContext(() => {
-    const token = localStorage.getItem("jwtToken");
+    const token = localStorage.getItem('jwtToken');
     return {
         headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
         },
     };
 });

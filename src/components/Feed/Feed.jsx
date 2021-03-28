@@ -12,7 +12,6 @@ import { FETCH_POSTS_QUERY } from '../../util/graphqlQueries';
 
 const Feed = () => {
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
-
     return (
         <div className='feed'>
             <div className='feed__wrapper'>
@@ -38,6 +37,8 @@ const Feed = () => {
                                     likeCount={post.likeCount}
                                     imageURL={post.imageURL}
                                     userDetails={post.user}
+                                    isComment={post.isComment}
+                                    parentPostId={post.replyingTo}
                                 />
                             ))
                         ) : (

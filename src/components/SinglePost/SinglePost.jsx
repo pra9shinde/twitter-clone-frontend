@@ -19,10 +19,11 @@ import LikeButton from '../Feed/Post/LikeButton/LikeButton';
 import Loader from '../Loader/Loader';
 import Modal from '../Modal/Modal';
 import TweetBox from '../Feed/TweetBox/TweetBox';
+import DeleteButton from '../Feed/Post/DeleteButton/DeleteButton';
 
 import config from '../../config';
+import { FETCH_POST } from '../../util/graphqlQueries';
 import { AuthContext } from '../../context/auth';
-import DeleteButton from '../Feed/Post/DeleteButton/DeleteButton';
 
 const SinglePost = (props) => {
     const history = useHistory();
@@ -225,50 +226,5 @@ const SinglePost = (props) => {
         </>
     );
 };
-
-const FETCH_POST = gql`
-    query($postId: ID!) {
-        getPost(postId: $postId) {
-            id
-            body
-            createdAt
-            username
-            likeCount
-            likes {
-                username
-            }
-            commentCount
-            comments {
-                id
-                body
-                createdAt
-                username
-                likes {
-                    id
-                    username
-                }
-                likeCount
-                commentCount
-                imageURL
-                user {
-                    id
-                    email
-                    username
-                    name
-                    profilePic
-                }
-            }
-            imageURL
-            user {
-                id
-                email
-                username
-                createdAt
-                name
-                profilePic
-            }
-        }
-    }
-`;
 
 export default SinglePost;
