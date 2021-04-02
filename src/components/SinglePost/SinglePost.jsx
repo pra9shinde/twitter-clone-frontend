@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './SinglePost.css';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Avatar } from '@material-ui/core';
 import moment from 'moment';
 
@@ -164,8 +164,8 @@ const SinglePost = (props) => {
                                                     createdAt={comment.createdAt}
                                                     imageURL={comment.imageURL}
                                                     userDetails={comment.user}
-                                                    isComment={true}
-                                                    parentPostId={data.getPost.id}
+                                                    isComment={comment.isComment}
+                                                    parentPostId={comment.replyingTo}
                                                 />
                                             ))}
                                         </div>

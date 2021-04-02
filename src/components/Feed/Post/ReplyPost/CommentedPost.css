@@ -1,0 +1,47 @@
+.parentPost .post {
+    border-bottom: none;
+}
+
+.user__replied {
+    display: flex;
+    color: #767c7f;
+    padding: 10px 0px 0px 15px;
+}
+
+.user__replied .user__replied__username {
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.user__replied .MuiSvgIcon-root {
+    font-size: 16px;
+}
+
+.comment__post {
+    position: relative;
+}
+
+.verticle__line__replyPost {
+    position: absolute;
+    top: -53px;
+    left: 28px;
+    width: 2px;
+    height: 30px;
+    background-color: #c4cfd6;
+}
+
+.replyingPost .post {
+    border-bottom: none;
+}
+
+.commented__post {
+    border-bottom: 1px solid var(--twitter-background);
+}
+
+.loadMore___comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}

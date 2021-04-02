@@ -14,7 +14,21 @@ import DeleteButton from './DeleteButton/DeleteButton';
 
 const VerifiedIcon = require('../../../assets/images/twitter-verified-badge.svg');
 
-const Post = ({ id, username, verified, text, likeCount, commentCount, likes, createdAt, imageURL, userDetails, isComment, parentPostId }) => {
+const Post = ({
+    id,
+    username,
+    verified,
+    text,
+    likeCount,
+    commentCount,
+    likes,
+    createdAt,
+    imageURL,
+    userDetails,
+    isComment,
+    parentPostId,
+    deleteCallback,
+}) => {
     const { user } = useContext(AuthContext);
 
     return (
@@ -52,12 +66,14 @@ const Post = ({ id, username, verified, text, likeCount, commentCount, likes, cr
                         <span>1</span>
                     </div>
 
-                    <LikeButton post={{ id, likes, likeCount }} />
+                    <LikeButton post={{ id, likes, likeCount }} isComment={isComment} parentPostId={parentPostId} />
 
                     <div className='post__footer__option'>
                         <ShareIcon fontSize='small' />
                     </div>
-                    {user && username === user.username && <DeleteButton postId={id} isComment={isComment} parentPostId={parentPostId} />}
+                    {user && username === user.username && (
+                        <DeleteButton postId={id} callback={deleteCallback} isComment={isComment} parentPostId={parentPostId} />
+                    )}
                 </div>
             </div>
         </div>

@@ -39,6 +39,8 @@ export const FETCH_POST = gql`
                 username
             }
             commentCount
+            isComment
+            replyingTo
             comments {
                 id
                 body
@@ -58,6 +60,8 @@ export const FETCH_POST = gql`
                     name
                     profilePic
                 }
+                isComment
+                replyingTo
             }
             imageURL
             user {

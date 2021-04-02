@@ -7,6 +7,7 @@ import TweetBox from './TweetBox/TweetBox';
 import Post from './Post/Post';
 import Loader from '../Loader/Loader';
 import ServerDownError from '../ServerDownError/ServerDownError';
+import CommentedPost from './Post/ReplyPost/CommentedPost';
 
 import { FETCH_POSTS_QUERY } from '../../util/graphqlQueries';
 
@@ -25,22 +26,26 @@ const Feed = () => {
                 ) : (
                     <>
                         {data ? (
-                            data.getPosts.map((post) => (
-                                <Post
-                                    key={post.id}
-                                    id={post.id}
-                                    createdAt={post.createdAt}
-                                    text={post.body}
-                                    username={post.username}
-                                    commentCount={post.commentCount}
-                                    likes={post.likes}
-                                    likeCount={post.likeCount}
-                                    imageURL={post.imageURL}
-                                    userDetails={post.user}
-                                    isComment={post.isComment}
-                                    parentPostId={post.replyingTo}
-                                />
-                            ))
+                            data.getPosts.map((post) => {
+                                return post.commentCount > 0 ? (
+                                    <CommentedPost key={post.id} post={post} />
+                                ) : (
+                                    <Post
+                                        key={post.id}
+                                        id={post.id}
+                                        createdAt={post.createdAt}
+                                        text={post.body}
+                                        username={post.username}
+                                        commentCount={post.commentCount}
+                                        likes={post.likes}
+                                        likeCount={post.likeCount}
+                                        imageURL={post.imageURL}
+                                        userDetails={post.user}
+                                        isComment={post.isComment}
+                                        parentPostId={post.replyingTo}
+                                    />
+                                );
+                            })
                         ) : (
                             <ServerDownError />
                         )}

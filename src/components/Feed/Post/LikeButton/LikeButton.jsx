@@ -6,7 +6,7 @@ import './LikeButton.css';
 import { AuthContext } from '../../../../context/auth';
 
 
-const LikeButton = ({ post }) => {
+const LikeButton = ({ post, isComment, parentPostId }) => {
     const { user } = useContext(AuthContext);
 
     const [liked, setLiked] = useState(false);
