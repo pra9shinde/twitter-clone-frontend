@@ -4,7 +4,14 @@
     /* background-color: #31404e; */
     background-color: #15202b;
     z-index: 100;
-    min-height: 100vh;
+    background-size: cover;
+}
+
+.register .wrapper{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .register .register__backdrop {

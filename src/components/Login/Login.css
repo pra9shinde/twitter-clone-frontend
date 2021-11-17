@@ -1,5 +1,6 @@
 .auth__container {
     background: #15202b;
+    height: 100vh;
 }
 
 .login {

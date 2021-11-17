@@ -60,123 +60,107 @@ const Register = ({ inputHandler, closeRegister }) => {
             style={{
                 background: `url(${BgImage}), #15202B `,
                 backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
             }}
         >
-            <div className='register__backdrop'>
-                <div className='register__modal'>
-                    <div className='register__modal-content'>
-                        <div className='register__icon'>
-                            <Link to='/'>
-                                <TwitterIcon />
-                            </Link>
-                        </div>
-                        <div
-                            className='register__closeIcon'
-                            onClick={closeRegister}
-                        >
-                            <CloseIcon />
-                        </div>
-                        <h1>Create your account</h1>
-
-                        {Object.keys(errors).length > 0 && (
-                            <div className='form__errors'>
-                                <ul className='errors-ul'>
-                                    {Object.values(errors).map((value, i) => (
-                                        <li key={i}>*{value}</li>
-                                    ))}
-                                </ul>
+            <div className='wrapper'>
+                <div className='register__backdrop'>
+                    <div className='register__modal'>
+                        <div className='register__modal-content'>
+                            <div className='register__icon'>
+                                <Link to='/'>
+                                    <TwitterIcon />
+                                </Link>
                             </div>
-                        )}
-
-                        <form
-                            className='login__form'
-                            noValidate
-                            onSubmit={registerSubmitHandler}
-                        >
-                            <input
-                                type='text'
-                                name='username'
-                                placeholder='Username*'
-                                onFocus={inputHandler}
-                                onBlur={inputHandler}
-                                onChange={changeHandler}
-                                className='login__input'
-                            />
-                            <input
-                                type='text'
-                                name='name'
-                                placeholder='Full Name*'
-                                onFocus={inputHandler}
-                                onBlur={inputHandler}
-                                onChange={changeHandler}
-                                className='login__input'
-                            />
-                            <input
-                                type='text'
-                                name='email'
-                                placeholder='Email*'
-                                onFocus={inputHandler}
-                                onBlur={inputHandler}
-                                onChange={changeHandler}
-                                className='login__input'
-                            />
-                            <input
-                                type='password'
-                                name='password'
-                                placeholder='Password*'
-                                onFocus={inputHandler}
-                                onBlur={inputHandler}
-                                onChange={changeHandler}
-                                className='login__input'
-                            />
-                            <input
-                                type='password'
-                                name='confirmPassword'
-                                placeholder='Confirm Password*'
-                                onFocus={inputHandler}
-                                onChange={changeHandler}
-                                onBlur={inputHandler}
-                                className='login__input'
-                            />
-
-                            <div className='selectGroup'>
-                                <input
-                                    type='file'
-                                    name='profilePic'
-                                    id='profilePic'
-                                />
-                                <label
-                                    htmlFor='profilePic'
-                                    style={{ marginLeft: '10px' }}
-                                >
-                                    Profile Picture
-                                </label>
+                            <div className='register__closeIcon' onClick={closeRegister}>
+                                <CloseIcon />
                             </div>
+                            <h1>Create your account</h1>
 
-                            {showLoader ? (
-                                <Loader />
-                            ) : (
-                                <>
-                                    <Button
-                                        type='submit'
-                                        variant='outlined'
-                                        className='sidebar__tweet'
-                                        fullWidth
-                                    >
-                                        Create
-                                    </Button>
-                                    <Button
-                                        variant='outlined'
-                                        className='secondary__btn'
-                                        fullWidth
-                                        style={{ marginTop: '20px' }}
-                                        onClick={closeRegister}
-                                    >
-                                        Login
-                                    </Button>
-                                </>
+                            {Object.keys(errors).length > 0 && (
+                                <div className='form__errors'>
+                                    <ul className='errors-ul'>
+                                        {Object.values(errors).map((value, i) => (
+                                            <li key={i}>*{value}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             )}
-                        </form>
+
+                            <form className='login__form' noValidate onSubmit={registerSubmitHandler}>
+                                <input
+                                    type='text'
+                                    name='username'
+                                    placeholder='Username*'
+                                    onFocus={inputHandler}
+                                    onBlur={inputHandler}
+                                    onChange={changeHandler}
+                                    className='login__input'
+                                />
+                                <input
+                                    type='text'
+                                    name='name'
+                                    placeholder='Full Name*'
+                                    onFocus={inputHandler}
+                                    onBlur={inputHandler}
+                                    onChange={changeHandler}
+                                    className='login__input'
+                                />
+                                <input
+                                    type='text'
+                                    name='email'
+                                    placeholder='Email*'
+                                    onFocus={inputHandler}
+                                    onBlur={inputHandler}
+                                    onChange={changeHandler}
+                                    className='login__input'
+                                />
+                                <input
+                                    type='password'
+                                    name='password'
+                                    placeholder='Password*'
+                                    onFocus={inputHandler}
+                                    onBlur={inputHandler}
+                                    onChange={changeHandler}
+                                    className='login__input'
+                                />
+                                <input
+                                    type='password'
+                                    name='confirmPassword'
+                                    placeholder='Confirm Password*'
+                                    onFocus={inputHandler}
+                                    onChange={changeHandler}
+                                    onBlur={inputHandler}
+                                    className='login__input'
+                                />
+
+                                <div className='selectGroup'>
+                                    <input type='file' name='profilePic' id='profilePic' />
+                                    <label htmlFor='profilePic' style={{ marginLeft: '10px' }}>
+                                        Profile Picture
+                                    </label>
+                                </div>
+
+                                {showLoader ? (
+                                    <Loader />
+                                ) : (
+                                    <>
+                                        <Button type='submit' variant='outlined' className='sidebar__tweet' fullWidth>
+                                            Create
+                                        </Button>
+                                        <Button
+                                            variant='outlined'
+                                            className='secondary__btn'
+                                            fullWidth
+                                            style={{ marginTop: '20px' }}
+                                            onClick={closeRegister}
+                                        >
+                                            Login
+                                        </Button>
+                                    </>
+                                )}
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,23 +169,9 @@ const Register = ({ inputHandler, closeRegister }) => {
 };
 
 const REGISTER_USER = gql`
-    mutation register(
-        $username: String!
-        $password: String!
-        $confirmPassword: String!
-        $email: String!
-        $name: String!
-        $image: Upload
-    ) {
+    mutation register($username: String!, $password: String!, $confirmPassword: String!, $email: String!, $name: String!, $image: Upload) {
         register(
-            registerInput: {
-                username: $username
-                password: $password
-                confirmPassword: $confirmPassword
-                email: $email
-                name: $name
-                image: $image
-            }
+            registerInput: { username: $username, password: $password, confirmPassword: $confirmPassword, email: $email, name: $name, image: $image }
         ) {
             id
             username

@@ -1,6 +1,6 @@
 const config = {
-    SERVER_URL: "http://localhost:4000/graphql",
-    STATIC_FILES_URL: "http://localhost:4000",
+    SERVER_URL: "https://shindetter.herokuapp.com/graphql",
+    STATIC_FILES_URL: "https://shindetter.herokuapp.com/",
 };
 
 export default config;
