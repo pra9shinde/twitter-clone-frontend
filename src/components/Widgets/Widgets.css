@@ -19,8 +19,21 @@
   border: 0;
   outline: 0;
   margin-left: 10px;
+  color: #fff;
+}
+
+.widgets__input input::placeholder{
+    color: #e0dcdc;
 }
 
 .widgets__searchIcon {
   color: gray;
+}
+
+
+
+@media screen and (max-width: 768px){
+ .widgets{
+   display: none;
+ }
 }

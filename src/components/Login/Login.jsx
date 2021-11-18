@@ -76,7 +76,7 @@ const Login = () => {
                                         <TwitterIcon />
                                     </Link>
                                 </div>
-                                <h1>Log in to Twitter</h1>
+                                <h1>Log in to Shindetter</h1>
 
                                 {Object.keys(errors).length > 0 && (
                                     <div className="form__errors">

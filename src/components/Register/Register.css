@@ -58,3 +58,36 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width: 700px){
+    .register .wrapper {
+        height: 100%;
+        display: block;
+        justify-content: unset;
+        align-items: unset;
+    }
+
+    .register__modal .register__modal-content {
+        padding: 15px;
+    }
+
+    .register__modal-content h1 {
+        font-size: 16px;
+        margin: 5px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .register__icon .MuiSvgIcon-root {
+        font-size: 25px;
+    }
+
+    .login__form input {
+        height: 45px;
+        padding: 10px 15px;
+    }
+
+    .selectGroup label{
+        font-size: 12px;
+    }
+}

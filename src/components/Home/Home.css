@@ -2,4 +2,6 @@
     display: flex;
     max-width: 1300px;
     margin: 0 auto;
+    background-color: var(--twitter-dark-color);
+    color: #fff;
 }

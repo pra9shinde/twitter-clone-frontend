@@ -12,7 +12,8 @@
 .tweetBox .tweetBox__input {
     display: flex;
     margin-bottom: 10px;
-    background: #f4f4f4;
+    /* background: #f4f4f4; */
+    background: #1c2937;
     width: 100%;
     padding: 10px;
     border-radius: 15px;
@@ -31,6 +32,11 @@
     outline: 0;
     margin-left: 20px;
     background: transparent;
+    color: #ffffff;
+}
+
+.tweetBox__input input::placeholder {
+    color: #e0dcdc;
 }
 
 .tweetBox__submit .tweetBox__submit-left .MuiSvgIcon-root {
@@ -72,4 +78,34 @@
     height: auto;
     margin: 10px;
     border-radius: 15px;
+}
+
+@media screen and (max-width: 768px){
+    .tweetBox .tweetBox__input {
+        padding: 5px;
+    }
+
+    .tweetBox__input input {
+        font-size: 14px;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+    .tweetBox__input .MuiAvatar-root{
+        width: 35px;
+        height: 35px;
+    }
+
+    .tweetBox__btn {
+        height: 30px !important;
+        padding: 0px 25px !important;
+    }
+
+    .tweetBox__submit-left .icon {
+        padding: 4px 5px;
+    }
+    
+    .tweetBox__submit .tweetBox__submit-left .MuiSvgIcon-root {
+        font-size: 22px;
+    }
 }

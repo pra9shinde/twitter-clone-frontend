@@ -24,3 +24,16 @@
 .sidebarOption--active {
   color: var(--twitter-color);
 }
+
+
+@media screen and (max-width: 768px){
+  .sidebarOption > h2 {
+      font-weight: 600;
+      font-size: 14px;
+      margin-right: 5px;
+  }
+
+  .sidebarOption > .MuiSvgIcon-root {
+    margin: 10px;
+  }
+}

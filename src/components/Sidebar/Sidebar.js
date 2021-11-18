@@ -34,7 +34,11 @@ const Sidebar = () => {
         <div className='sidebar'>
             <div className='sidebar__menus'>
                 <Link to='/'>
-                    <TwitterIcon className='sidebar__twitterIcon' />
+                    <div className="siderbar__lg">
+                        <TwitterIcon className='sidebar__twitterIcon' />
+                        <h1><span>Shinde</span>tter</h1>
+                    </div>
+
                     <SidebarOption text='Home' Icon={HomeIcon} to='/' active />
                 </Link>
 

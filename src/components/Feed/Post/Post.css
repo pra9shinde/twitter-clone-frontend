@@ -142,3 +142,24 @@
         background-position: -1952px -10px;
     }
 }
+
+@media screen and (max-width: 768px){
+
+    .post__headerText h3 {
+        font-size: 12px;
+    }
+
+    .postHeaderDesc {
+        font-size: 12px;
+    }
+
+    .post__footer {
+        justify-content: space-between;
+    }
+
+    .post__footer__option {
+        padding: 5px 8px;
+    }
+
+    
+}

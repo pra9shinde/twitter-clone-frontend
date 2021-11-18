@@ -12,7 +12,15 @@ body {
     -moz-osx-font-smoothing: grayscale;
 
     --twitter-color: #50b7f5;
-    --twitter-background: #e6ecf0;
+    --twitter-dark-color: #15202b;
+    
+    /* --twitter-background: #e6ecf0; */
+    --twitter-background: #1c2937;
+    /* --twitter-dark-background: #1c2937; */
+    --grey-border : 1px solid rgb(109 115 119);
+
+    background-color: var(--twitter-dark-color);
+
 }
 
 a {
@@ -23,6 +31,7 @@ a {
 input {
     font-family: "Montserrat", sans-serif;
 }
+
 
 .form__errors .errors-ul {
     list-style: none;

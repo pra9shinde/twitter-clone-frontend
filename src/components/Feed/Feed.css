@@ -16,7 +16,6 @@
 .feed__header {
     position: sticky;
     top: 0;
-    background-color: white;
     z-index: 100;
     border-bottom: 1px solid var(--twitter-background);
     padding: 15px 20px;
@@ -37,4 +36,16 @@
 .feed {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+
+@media screen and (max-width: 768px){
+    .feed{
+        flex: 0.8;
+    }
+
+    .feed__header > h2 {
+        font-weight: 800;
+        font-size: 16px;
+    }
 }

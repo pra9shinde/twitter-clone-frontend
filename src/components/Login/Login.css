@@ -88,3 +88,10 @@
 }
 
 /*------------ Animation using react transition group ---------*/
+
+@media screen and (max-width: 700px){
+
+    .secondary__btn {
+        height: 40px;
+    }
+}

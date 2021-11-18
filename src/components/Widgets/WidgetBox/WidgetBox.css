@@ -1,5 +1,6 @@
 .widgetBox {
-  background-color: #f7f9fa;
+  /* background-color: #f7f9fa; */
+  background-color: var(--twitter-background);
   border-radius: 20px;
   padding: 20px;
   margin-bottom: 20px;
@@ -7,6 +8,6 @@
 
 .widgetBox h3 {
   font-size: 18px;
-  border-bottom: 1px solid rgb(235, 238, 240);
+  border-bottom: var(--grey-border);
   padding-bottom: 10px;
 }
