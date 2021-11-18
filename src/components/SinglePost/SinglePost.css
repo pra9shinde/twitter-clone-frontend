@@ -8,7 +8,7 @@
 }
 
 .singlePost__container {
-    border-bottom: 1px solid rgb(235, 238, 240);
+    border-bottom: var(--twitter-background);
 }
 
 .singlePost__header {
@@ -64,8 +64,8 @@
 .singlePost__footer-top {
     display: flex;
     align-items: center;
-    border-top: 1px solid rgb(235, 238, 240);
-    border-bottom: 1px solid rgb(235, 238, 240);
+    border-top: var(--grey-border); 
+    border-bottom: var(--grey-border);
     padding: 15px 10px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .singlePost__footer-top .item span {
-    color: #000;
+    color: #fff;
     font-weight: 600;
 }
 
@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: 1px solid rgb(235, 238, 240);
+    border-bottom: var(--twitter-background);
 }
 
 .single__post__notfound {
