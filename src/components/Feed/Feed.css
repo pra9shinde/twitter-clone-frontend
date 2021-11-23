@@ -1,5 +1,5 @@
 .feed {
-    flex: 0.5;
+    flex: 1;
     border-right: 1px solid var(--twitter-background);
     border-left: 1px solid var(--twitter-background);
     min-width: fit-content;
@@ -21,6 +21,7 @@
     padding: 15px 20px;
     display: flex;
     align-items: center;
+    padding-left: 35px;
 }
 
 .feed__header > h2 {
@@ -38,10 +39,9 @@
     scrollbar-width: none;
 }
 
-
-@media screen and (max-width: 768px){
-    .feed{
-        flex: 0.8;
+@media screen and (max-width: 768px) {
+    .feed {
+        flex: 1;
     }
 
     .feed__header > h2 {

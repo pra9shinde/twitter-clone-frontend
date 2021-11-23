@@ -1,39 +1,42 @@
 .sidebarOption {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: color 100ms ease-out;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 100ms ease-out;
 }
 
 .sidebarOption > .MuiSvgIcon-root {
-  margin: 15px;
+    margin: 15px;
 }
 
 .sidebarOption > h2 {
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 20px;
 }
 
 .sidebarOption:hover {
-  background-color: #e8f5fe;
-  border-radius: 30px;
-  color: var(--twitter-color);
+    background-color: #e8f5fe;
+    border-radius: 30px;
+    color: var(--twitter-color);
 }
 
 .sidebarOption--active {
-  color: var(--twitter-color);
+    color: var(--twitter-color);
 }
 
+.sidebar.shrink .sidebarOption {
+    justify-content: center;
+}
 
-@media screen and (max-width: 768px){
-  .sidebarOption > h2 {
-      font-weight: 600;
-      font-size: 14px;
-      margin-right: 5px;
-  }
+@media screen and (max-width: 768px) {
+    .sidebarOption > h2 {
+        font-weight: 600;
+        font-size: 14px;
+        margin-right: 5px;
+    }
 
-  .sidebarOption > .MuiSvgIcon-root {
-    margin: 10px;
-  }
+    .sidebarOption > .MuiSvgIcon-root {
+        margin: 10px;
+    }
 }

@@ -6,7 +6,25 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 100vh;
+    height: 100vh;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+.hide {
+    transition: opacity 0.3s;
+}
+
+.sidebar.shrink .hide {
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+}
+
+.sidebar.shrink {
+    min-width: unset;
+    width: 80px;
+    flex: unset;
 }
 
 .siderbar__lg {
@@ -14,16 +32,53 @@
     align-items: center;
 }
 
-.siderbar__lg h1{
+.siderbar__lg h1 {
     font-size: 16px;
     margin-left: 5px;
     font-style: oblique;
-
 }
 
-.siderbar__lg h1 span{
+.siderbar__lg h1 span {
     color: var(--twitter-color);
     font-size: 20px;
+}
+
+.sidebar__shrink-btn {
+    position: absolute;
+    top: 50%;
+    right: -28px;
+    background-color: var(--twitter-color);
+    height: 27px;
+    width: 27px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+    transform: translateY(-50%) translateX(-8px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar__shrink-btn .MuiSvgIcon-root {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar:hover .sidebar__shrink-btn {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    z-index: 999;
 }
 
 .sidebar__tweet {
@@ -36,6 +91,7 @@
     height: 50px !important;
     margin-top: 20px !important;
     margin-right: 10px !important;
+    width: 100%;
 }
 
 .sidebar__twitterIcon {
@@ -44,6 +100,10 @@
     margin-left: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+
+.sidebar.shrink .sidebar__twitterIcon {
+    margin-left: auto;
 }
 
 /* Modal show animation */
@@ -65,25 +125,36 @@
     transition: all 250ms ease-out;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     .sidebar__tweet {
         height: 40px !important;
     }
 
     .sidebar {
-        flex: 0.2;
         min-width: unset;
         padding-left: 5px;
         padding-right: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        max-height: 100vh;
+        width: 50px;
+        flex: unset;
     }
 
     .sidebar__twitterIcon {
         margin-left: 8px;
         margin-bottom: 10px;
         margin-top: 10px;
+    }
+
+    /* .hide {
+        transition: opacity 0.3s;
+    }
+
+    .sidebar.shrink .hide {
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+    } */
+
+    .sidebar.shrink {
+        width: 50px;
     }
 }

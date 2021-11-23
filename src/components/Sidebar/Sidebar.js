@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
@@ -12,6 +12,9 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 import { Button, Avatar } from '@material-ui/core';
 
 import SidebarOption from './SidebarOption/SidebarOption';
@@ -25,18 +28,42 @@ const Sidebar = () => {
     const { user } = useContext(AuthContext);
 
     const [showModal, setShowModal] = useState(false);
+    const [shrink, setShrink] = useState(false);
 
     const modalHandler = () => {
         setShowModal(!showModal);
     };
 
+    const toggleSidebar = () => {
+        setShrink(!shrink);
+    };
+
+    const windowResizeHandler = () => {
+        // effect
+        if (window.innerWidth <= 768) {
+            setShrink(true);
+        }
+    };
+
+    useEffect(() => {
+        windowResizeHandler();
+        window.addEventListener('resize', windowResizeHandler);
+        return () => window.removeEventListener('resize', windowResizeHandler);
+    }, []);
+
     return (
-        <div className='sidebar'>
+        <div className={`sidebar ${shrink ? 'shrink' : ''} `}>
             <div className='sidebar__menus'>
                 <Link to='/'>
-                    <div className="siderbar__lg">
+                    <div className='siderbar__lg'>
                         <TwitterIcon className='sidebar__twitterIcon' />
-                        <h1><span>Shinde</span>tter</h1>
+                        <h1 className='hide'>
+                            <span>Shinde</span>tter
+                        </h1>
+
+                        <div className='sidebar__shrink-btn' onClick={toggleSidebar}>
+                            {shrink ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        </div>
                     </div>
 
                     <SidebarOption text='Home' Icon={HomeIcon} to='/' active />
@@ -51,7 +78,7 @@ const Sidebar = () => {
                 <Link to='/login'>
                     <SidebarOption text='Register' Icon={PersonAddIcon} />
                 </Link>
-                <Button variant='outlined' className='sidebar__tweet' fullWidth>
+                <Button variant='outlined' className='sidebar__tweet hide'>
                     Tweet
                 </Button>
             </div>
@@ -74,12 +101,12 @@ const Sidebar = () => {
                         {/* Modal */}
                     </div>
 
-                    <div className='sidebar__logout__info'>
+                    <div className='sidebar__logout__info hide'>
                         <h6>{user.name}</h6>
                         <p>@{user.username}</p>
                     </div>
 
-                    <div className='sidebar__logout__more'>
+                    <div className='sidebar__logout__more hide'>
                         <MoreHorizIcon />
                     </div>
                 </div>
