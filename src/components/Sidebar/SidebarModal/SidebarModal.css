@@ -94,3 +94,14 @@
         height: 30px;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .sidebar__logout__info h6,
+    .sidebar__logout__info p {
+        font-size: 10px;
+    }
+
+    .sidebar__logout__container {
+        padding: 0;
+    }
+}

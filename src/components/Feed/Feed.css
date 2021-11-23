@@ -21,7 +21,7 @@
     padding: 15px 20px;
     display: flex;
     align-items: center;
-    padding-left: 35px;
+    z-index: 1000;
 }
 
 .feed__header > h2 {

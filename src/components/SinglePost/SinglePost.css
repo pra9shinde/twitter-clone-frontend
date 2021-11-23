@@ -1,5 +1,4 @@
 .feed__header-back-btn {
-    margin-right: 30px;
     color: var(--twitter-color);
 }
 
@@ -64,7 +63,7 @@
 .singlePost__footer-top {
     display: flex;
     align-items: center;
-    border-top: var(--grey-border); 
+    border-top: var(--grey-border);
     border-bottom: var(--grey-border);
     padding: 15px 10px;
 }

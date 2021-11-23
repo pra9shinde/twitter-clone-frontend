@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.post__headerText h3{
+.post__headerText h3 {
     font-size: 14px;
 }
 
@@ -143,8 +143,7 @@
     }
 }
 
-@media screen and (max-width: 768px){
-
+@media screen and (max-width: 768px) {
     .post__headerText h3 {
         font-size: 12px;
     }
@@ -160,6 +159,10 @@
     .post__footer__option {
         padding: 5px 8px;
     }
+}
 
-    
+@media screen and (max-width: 480px) {
+    .post__headerText {
+        flex-wrap: wrap;
+    }
 }

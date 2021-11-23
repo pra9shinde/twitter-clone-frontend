@@ -27,22 +27,6 @@
     flex: unset;
 }
 
-.siderbar__lg {
-    display: flex;
-    align-items: center;
-}
-
-.siderbar__lg h1 {
-    font-size: 16px;
-    margin-left: 5px;
-    font-style: oblique;
-}
-
-.siderbar__lg h1 span {
-    color: var(--twitter-color);
-    font-size: 20px;
-}
-
 .sidebar__shrink-btn {
     position: absolute;
     top: 50%;
@@ -79,6 +63,22 @@
     top: 0;
     left: 100%;
     z-index: 999;
+}
+
+.siderbar__lg {
+    display: flex;
+    align-items: center;
+}
+
+.siderbar__lg h1 {
+    font-size: 16px;
+    margin-left: 5px;
+    font-style: oblique;
+}
+
+.siderbar__lg h1 span {
+    color: var(--twitter-color);
+    font-size: 20px;
 }
 
 .sidebar__tweet {
@@ -126,16 +126,14 @@
 }
 
 @media screen and (max-width: 768px) {
-    .sidebar__tweet {
-        height: 40px !important;
-    }
-
     .sidebar {
         min-width: unset;
-        padding-left: 5px;
-        padding-right: 5px;
-        width: 50px;
-        flex: unset;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .sidebar__tweet {
+        height: 40px !important;
     }
 
     .sidebar__twitterIcon {
@@ -144,17 +142,16 @@
         margin-top: 10px;
     }
 
-    /* .hide {
-        transition: opacity 0.3s;
-    }
-
-    .sidebar.shrink .hide {
-        opacity: 0;
-        display: none;
-        pointer-events: none;
-    } */
-
     .sidebar.shrink {
         width: 50px;
+    }
+
+    .sidebar__shrink-btn {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .sidebar.shrink .siderbar__lg {
+        justify-content: center;
     }
 }
