@@ -105,3 +105,9 @@
     width: 100%;
     margin-top: 20px;
 }
+
+@media screen and (max-width: 480px) {
+    .singlePost__footer-top .item {
+        font-size: 14px;
+    }
+}
