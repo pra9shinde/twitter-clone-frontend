@@ -21,7 +21,7 @@
     transform: translateX(-50%);
     z-index: 999;
     min-height: 250px;
-    background-color: white;
+    background-color: var(--twitter-background);
     border-radius: 15px;
     max-width: 600px;
     min-width: 450px;
