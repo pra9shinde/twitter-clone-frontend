@@ -62,6 +62,7 @@ const TweetBox = ({ modal, isComment, replyingTo, callback }) => {
             if (callback) callback(); //close the comment modal
         },
         onError: (err) => {
+            console.log(err);
             const displayError = err.graphQLErrors[0].message ? err.graphQLErrors[0].message : err;
             setErrors(displayError);
             setShowLoader(false);

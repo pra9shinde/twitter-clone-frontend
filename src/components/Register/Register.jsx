@@ -36,6 +36,7 @@ const Register = ({ inputHandler, closeRegister }) => {
             history.push('/');
         },
         onError: (err) => {
+            console.log(err);
             setErrors(err.graphQLErrors[0].extensions.errors);
             setShowLoader(false);
         },
