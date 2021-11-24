@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './LikeButton.css';
 import { AuthContext } from '../../../../context/auth';
-
+import LikeBtnImg from '../../../../assets/images/web_heart_animation.png';
 
 const LikeButton = ({ post, isComment, parentPostId }) => {
     const { user } = useContext(AuthContext);
@@ -41,7 +41,11 @@ const LikeButton = ({ post, isComment, parentPostId }) => {
 
     return user ? (
         <div className='post__footer__like__btn '>
-            <div className={`like-btn-svg ${liked ? 'active animate' : ''}`} onClick={likeHandler}></div>
+            <div
+                className={`like-btn-svg ${liked ? 'active animate' : ''}`}
+                onClick={likeHandler}
+                style={{ backgroundImage: 'url(' + LikeBtnImg + ')' }}
+            ></div>
             <span>{post.likeCount}</span>
         </div>
     ) : (
@@ -51,7 +55,7 @@ const LikeButton = ({ post, isComment, parentPostId }) => {
         // </div>
         <Link to='/login'>
             <div className='post__footer__like__btn '>
-                <div className={`like-btn-svg`}></div>
+                <div className={`like-btn-svg`} style={{ backgroundImage: 'url(' + LikeBtnImg + ')' }}></div>
                 <span>{post.likeCount}</span>
             </div>
         </Link>

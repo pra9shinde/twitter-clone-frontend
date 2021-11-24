@@ -118,7 +118,8 @@
 .like-btn-svg {
     width: 50px;
     height: 50px;
-    background: url(http://localhost:4000/uploads/images/web_heart_animation.png) no-repeat;
+    background-repeat: no-repeat;
+    /* background: url(http://localhost:4000/uploads/images/web_heart_animation.png) no-repeat; */
     background-position: -20px -10px;
     cursor: pointer;
     /* transform: translate(-40px, -1px); */
