@@ -6,6 +6,10 @@
 
 # Live Link - [Shindetter](https://shindetter.netlify.app/)
 
+Dummy username & password for testing \
+Username : user \
+Password : 12345678 
+
 A Simple Twitter Clone built using MERNG Stack
 
 -   MongoDB
