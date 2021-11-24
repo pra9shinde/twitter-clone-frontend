@@ -4,6 +4,12 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
+# Live Link - [Shindetter](https://shindetter.netlify.app/)
+
+Dummy username & password for testing \
+Username : user \
+Password : 12345678 
+
 A Simple Twitter Clone built using MERNG Stack
 
 -   MongoDB
@@ -12,9 +18,18 @@ A Simple Twitter Clone built using MERNG Stack
 -   NodeJS
 -   GraphQL
 
+## Screenshots
+![shindetter2](https://user-images.githubusercontent.com/46496160/143242472-48650393-e691-4904-bcbd-86f0898e2def.png)
+![shindetter-login](https://user-images.githubusercontent.com/46496160/143243104-a49ada76-b0df-496d-9464-0b7676701e01.png)
+![shindetter-register](https://user-images.githubusercontent.com/46496160/143243124-3a394212-0aeb-4b4c-9e24-9bcda6a797be.png)
+![shindetter-tweet](https://user-images.githubusercontent.com/46496160/143243188-ac002afd-0da2-4c4d-bd2f-86239bf0ee1f.png)
+![shindetter-responsive](https://user-images.githubusercontent.com/46496160/143243201-d0a6abd5-030c-41f2-8818-29093c7d0c10.png)
+
+
 ## Features
 
 -   Login, Register, JWT Authentication
+-   Mobile Responsive
 -   Tweet, Comment, Like
 -   Add Images inside tweets
 -   Sidebar with toggle
